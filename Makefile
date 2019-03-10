@@ -24,7 +24,7 @@ LFLAGS :=	-lft -L $(LIBDIR)
 
 LIB :=		$(LIBDIR)libft.a
 INC :=		ft_printf
-SRC :=		validator main tet_coord tetro_save_list map solve
+SRC :=		ft_printf main
 #liba lib
 
 INCS :=		$(addprefix $(INCDIR), $(addsuffix .h, $(INC)))
