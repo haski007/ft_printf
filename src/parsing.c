@@ -12,3 +12,10 @@
 
 #include "../includes/ft_printf.h"
 
+t_orgi      parse_this(const char *format, int nargs)
+{
+    t_orgi      args;
+
+    args.type = format[nargs];
+    return (args);
+}

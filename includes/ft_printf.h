@@ -19,12 +19,13 @@
 # include <stdio.h>
 # include <stdarg.h>
 
-typedef struct     s_param
+typedef struct     s_orgi
 {
+    char        type;
+}                  t_orgi;
 
-}                  t_param;
-
-int         ft_printf();
+int         ft_printf(const char *format, ...);
+t_orgi      parse_this(const char *format, int nargs);
 
 
 #endif

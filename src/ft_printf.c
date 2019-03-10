@@ -12,31 +12,33 @@
 
 #include "../includes/ft_printf.h"
 
-static int      count_args(char *format)
+static int      count_args(const char *format)
 {
+    char    *all_possible;
     int     i;
-    int     count;
 
-    i = -1;
-    count = 0;
-    while (format[++i])
+    i = 0;
+    all_possible = "cspdiouxX";
+    while (format[i])
     {
-        if(format[i] == '%')
-            count++;
+        if ((ft_strchr(all_possible, format[i])))
+            return (i + 1);
+        i++;
     }
-    return (count);
+    return (0);
 }
 
 int             ft_printf(const char *format, ...)
 {
     va_list args;
     int     done;
+    int     nargs;
+    t_orgi  params;
 
     done = 0;
-    if ((count_args(format)) == 0)
-        ft_putstr(format);
     va_start(args, format);
-    while (format)
+
+    while (*format)
     {
         if (*format != '%')
         {
@@ -45,9 +47,14 @@ int             ft_printf(const char *format, ...)
         }
         else
         {
-                   
+            format++;
+            nargs = count_args(format);
+            params = parse_this(format, nargs - 1);
+            printf("Type - %c\n", params.type);
+            format += nargs - 1;
         }
         format++;
     }
-   return (0);
+    printf("%d\n", nargs);
+    return (done);
 }
