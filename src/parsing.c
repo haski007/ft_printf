@@ -12,16 +12,24 @@
 
 #include "../includes/ft_printf.h"
 
-void        parse_this(va_list var, t_orgi params)
+int     parse_this(va_list var, t_orgi params)
 {
+    int     len;
+
+    len = 0;
     if (params.type == 'c')
-        ft_putchar(va_arg(var, int));
+        len += c_type(va_arg(var, int));
     else if (params.type == 's')
-        ft_putstr(va_arg(var, char*));
+        len += s_type(va_arg(var, char*));
     else if (params.type == 'd' || params.type == 'i')
-        ft_putnbr(va_arg(var, int));
+        len += d_type(va_arg(var, int));
     else if (params.type == 'o')
-        ft_putnbr(ft_atoi(itoa_base(va_arg(var, int), 8)));
+        len += o_type(va_arg(var, int));
     else if (params.type == 'u')
-        ft_putnbr(va_arg(var, unsigned int));
+        len += u_type(va_arg(var, int));
+    else if (params.type == 'x' || params.type == 'X')
+        len += x_type(va_arg(var, int), params.type);
+    else if (params.type == 'p')
+        len += p_type(var);
+    return (len);
 }

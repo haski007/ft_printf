@@ -16,16 +16,18 @@ int			count_size(int num, int base)
 {
 	int		size;
 
+	if (num == 0)
+		return(1);
 	size = 0;
 	while (num)
 	{
 		size++;
-		num = num / base;
+		num /= base;
 	}
 	return (size);
 }
 
-char		*itoa_base(int num, int base)
+char		*itoa_base(long long int num, int base)
 {
 	char	*str;
 	int		size;

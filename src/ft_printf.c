@@ -16,7 +16,7 @@ static t_orgi      save_this(const char *format, int nargs)
 {
     t_orgi      args;
 
-    args.type = format[nargs- 1];
+    args.type = format[nargs - 1];
     return (args);
 }
 
@@ -39,9 +39,9 @@ static int      count_args(const char *format)
 int             ft_printf(const char *format, ...)
 {
     va_list args;
-    int     done;
     int     nargs;
     t_orgi  params;
+    int     done;
 
     done = 0;
     va_start(args, format);
@@ -58,11 +58,10 @@ int             ft_printf(const char *format, ...)
             format++;
             nargs = count_args(format);
             params = save_this(format, nargs);
-            parse_this(args, params);
+            done += parse_this(args, params);
             format += nargs - 1;
         }
         format++;
     }
-    printf("%d\n", nargs);
     return (done);
 }

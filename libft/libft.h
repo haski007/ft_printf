@@ -82,7 +82,7 @@ int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
-char				*itoa_base(int num, int base);
+char				*itoa_base(long long int num, int base);
 
 # ifndef IS_SPACE
 #  define IS_SPACE(x) (x==' '||x=='\n'||x=='\t')

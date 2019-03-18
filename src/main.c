@@ -14,7 +14,14 @@
 
 int         main(void)
 {
-    ft_printf("Hi, I'm your test %%%%%s\n", "HUI sosi");
-    printf("\nHi, I'm your test %%%%%s\n", "HUI sosi");
+    int     my_result;
+    int     org_result;
+    int     a = 10;
+    int     *b = &a;
+
+    my_result = ft_printf("MY test |||||||%p\n", b);
+    org_result = printf("Original|||||||%p\n", b);
+    printf("\n\nMy result - %d\n", my_result);
+    printf("Original reuslt - %d\n", org_result);
     return (0);
 }
