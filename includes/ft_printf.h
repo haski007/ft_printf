@@ -25,7 +25,7 @@ typedef struct     s_orgi
 }                  t_orgi;
 
 int         ft_printf(const char *format, ...);
-t_orgi      parse_this(const char *format, int nargs);
+void      parse_this(va_list var, t_orgi params);
 
 
 #endif

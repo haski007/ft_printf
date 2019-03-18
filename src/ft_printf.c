@@ -12,6 +12,14 @@
 
 #include "../includes/ft_printf.h"
 
+static t_orgi      save_this(const char *format, int nargs)
+{
+    t_orgi      args;
+
+    args.type = format[nargs- 1];
+    return (args);
+}
+
 static int      count_args(const char *format)
 {
     char    *all_possible;
@@ -49,8 +57,8 @@ int             ft_printf(const char *format, ...)
         {
             format++;
             nargs = count_args(format);
-            params = parse_this(format, nargs - 1);
-            printf("Type - %c\n", params.type);
+            params = save_this(format, nargs);
+            parse_this(args, params);
             format += nargs - 1;
         }
         format++;
