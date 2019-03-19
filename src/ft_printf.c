@@ -17,7 +17,7 @@ static t_orgi      save_this(const char *format, int nargs)
     t_orgi      params;
 
     params.type = format[nargs - 1];
-    params.modifier = get_modifier(format, nargs, params);
+    params.modifier = get_modifier(format, nargs);
     return (params);
 }
 

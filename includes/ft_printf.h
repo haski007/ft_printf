@@ -32,7 +32,8 @@ int					c_type(char c);
 int					d_type(int nb);
 int					o_type(int nb);
 int					u_type(unsigned int nb);
-int					x_type(int nb, char reg);
+int					x_type(int nb, char res);
 int					p_type(va_list var);
+char                get_modifier(const char *format, int nargs);
 
 #endif

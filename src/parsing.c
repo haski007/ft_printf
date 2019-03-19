@@ -12,6 +12,25 @@
 
 #include "../includes/ft_printf.h"
 
+char                get_modifier(const char *format, int nargs)
+{
+    if (format[nargs - 2] == 'h')
+    {
+        if (format[nargs - 3] != 'h')
+            return ('h');
+        else if (format[nargs - 3] == 'h')
+            return ('H');
+    }
+    else if (format[nargs - 2] == 'l')
+    {
+        if (format[nargs - 3] != 'l')
+            return ('l');
+        else if (format[nargs - 3] == 'l')
+            return ('D');
+    }
+    return (0);
+}
+
 int     parse_this(va_list var, t_orgi params)
 {
     int     len;
