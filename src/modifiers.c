@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/10 12:55:48 by pdemian           #+#    #+#             */
-/*   Updated: 2019/03/10 12:55:51 by pdemian          ###   ########.fr       */
+/*   Created: 2019/03/19 16:36:28 by pdemian           #+#    #+#             */
+/*   Updated: 2019/03/19 16:36:29 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int         main(void)
+void    get_modifier(const char *format, int nargs, t_orgi params)
 {
-    int     my_result;
-    int     org_result;
-    int     a = 1999;
-    int     *b = &a;
+    if (format[nargs - 2] == 'h')
+    {
+        if (format[nargs - 3] != 'h')
+            params.modifier = 'h';
+        else if (format[nargs - 3] == 'h')
+            params
+    }
 
-    my_result = ft_printf("MY test |||||||%p ---- %c ----- %d\n", b, 'O', 1488);
-    org_result = printf("Original|||||||%p ---- %c ----- %d\n", b, 'O', 1488);
-    printf("\n\nMy result - %d\n", my_result);
-    printf("Original reuslt - %d\n", org_result);
-    return (0);
+
+
+
 }

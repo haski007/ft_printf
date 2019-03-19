@@ -14,10 +14,11 @@
 
 static t_orgi      save_this(const char *format, int nargs)
 {
-    t_orgi      args;
+    t_orgi      params;
 
-    args.type = format[nargs - 1];
-    return (args);
+    params.type = format[nargs - 1];
+    params.modifier = get_modifier(format, nargs, params);
+    return (params);
 }
 
 static int      count_args(const char *format)
