@@ -18,10 +18,10 @@ int         main(void)
     int     org_result;
     int     a = 1999;
     int     *b = &a;
-    short int  num = 32767;
+    unsigned short int  num = 3267;
 
-    my_result = ft_printf("MY test |||||||%hhp ---- %lc ----- %lld\n", b, 'O', num);
-    org_result = printf("Original|||||||%p ---- %c ----- %0d\n", b, 'O', num);
+    my_result = ft_printf("MY test |||||||%hhp ---- %lc ----- %o\n", b, 'O', -num);
+    org_result = printf("Original|||||||%p ---- %c ----- %o\n", b, 'O', -num);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original reuslt - %d\n", org_result);
     return (0);

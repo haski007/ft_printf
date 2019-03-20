@@ -47,3 +47,8 @@ int         p_type(va_list var)
     ft_putstr(adress);
     return (ft_strlen(adress));
 }
+
+int         f_type(va_list var)
+{
+    
+}

@@ -17,7 +17,7 @@ static t_orgi      save_this(const char *format, int nargs)
     t_orgi      params;
 
     params.type = format[nargs - 1];
-    params.modifier = get_modifier(format, nargs);
+    get_modifier(format, nargs, params);
     return (params);
 }
 
@@ -27,7 +27,7 @@ static int      count_args(const char *format)
     int     i;
 
     i = 0;
-    all_possible = "cspdiouxX";
+    all_possible = "cspdioufxX";
     while (format[i])
     {
         if ((ft_strchr(all_possible, format[i])))

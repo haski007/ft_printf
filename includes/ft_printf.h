@@ -21,8 +21,12 @@
 
 typedef struct		s_orgi
 {
-    char    modifier;
-	char    type;
+    unsigned int    h;
+    unsigned int    hh;
+    unsigned int    l;
+    unsigned int    ll;
+    unsigned int    L;
+	char            type;
 }					t_orgi;
 
 int					ft_printf(const char *format, ...);
@@ -34,6 +38,7 @@ int					o_type(int nb);
 int					u_type(unsigned int nb);
 int					x_type(int nb, char res);
 int					p_type(va_list var);
-char                get_modifier(const char *format, int nargs);
+int                 f_type(va_list var);
+void                get_modifier(const char *format, int nargs, t_orgi params);
 
 #endif

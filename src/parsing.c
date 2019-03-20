@@ -12,26 +12,28 @@
 
 #include "../includes/ft_printf.h"
 
-char                get_modifier(const char *format, int nargs)
+void                get_modifier(const char *format, int nargs, t_orgi params)
 {
     if (format[nargs - 2] == 'h')
     {
         if (format[nargs - 3] != 'h')
-            return ('h');
+            params.h = 1;
         else if (format[nargs - 3] == 'h')
-            return ('H');
+            params.hh = 1;
     }
     else if (format[nargs - 2] == 'l')
     {
         if (format[nargs - 3] != 'l')
-            return ('l');
+            params.l = 1;
         else if (format[nargs - 3] == 'l')
-            return ('D');
+            params.ll = 1;
     }
+    else if (format[nargs - 2] == 'L')
+        params.L = 1;
     return (0);
 }
 
-int     parse_this(va_list var, t_orgi params)
+int                  parse_this(va_list var, t_orgi params)
 {
     int     len;
 
@@ -50,5 +52,7 @@ int     parse_this(va_list var, t_orgi params)
         len += x_type(va_arg(var, int), params.type);
     else if (params.type == 'p')
         len += p_type(var);
+    else if (params.type == 'f')
+        len += f_type(var);
     return (len);
 }
