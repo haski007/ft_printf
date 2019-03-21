@@ -26,6 +26,8 @@ typedef struct		s_orgi
     unsigned int    l;
     unsigned int    ll;
     unsigned int    L;
+    unsigned int    precision;
+    unsigned int    width;
 	char            type;
 }					t_orgi;
 
@@ -38,7 +40,8 @@ int					o_type(int nb);
 int					u_type(unsigned int nb);
 int					x_type(int nb, char res);
 int					p_type(va_list var);
-int                 f_type(va_list var);
-void                get_modifier(const char *format, int nargs, t_orgi params);
+int                 f_type(va_list var, t_orgi params);
+t_orgi              get_modifier(const char *format, int nargs, t_orgi params);
+t_orgi              get_width(const char *format, int nargs, t_orgi params);
 
 #endif

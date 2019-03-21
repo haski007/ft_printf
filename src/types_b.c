@@ -35,6 +35,7 @@ int         p_type(va_list var)
 {
     char    *str;
     char    *adress;
+    int     adresslen;
     int     i;
 
     i = 0;
@@ -43,12 +44,20 @@ int         p_type(va_list var)
         if (str[i] > 64 && str[i] < 91)
             str[i] += 32;
     adress = ft_strjoin("0x", str);
-    free(str);
     ft_putstr(adress);
-    return (ft_strlen(adress));
+    adresslen = ft_strlen(adress);
+    free(adress);
+    return (adresslen);
 }
 
-int         f_type(va_list var)
+int         f_type(va_list var, t_orgi params)
 {
+    char    *str;
     
+    if (params.L == 1)
+        str = floatoa(va_arg(var, long double), params.precision);
+    else
+        str = floatoa(va_arg(var, double), params.precision);
+    ft_putstr(str);
+    return (ft_strlen(str));
 }

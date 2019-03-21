@@ -12,12 +12,40 @@
 
 #include "../includes/ft_printf.h"
 
-static t_orgi      save_this(const char *format, int nargs)
+static t_orgi        check_precision(const char *format, int nargs, t_orgi params)
 {
-    t_orgi      params;
+    char *str;
+
+    str = ft_strndup(format, nargs);
+    while (str[--nargs])
+    {
+        if (str[nargs] == '.' && str[nargs + 1] > 47
+         && str[nargs + 1] < 58)
+            params.precision = ft_atoi(str + 1 + nargs);
+    }
+    return (params);
+}
+
+static t_orgi        null_all(t_orgi params)
+{
+    params.h = 0;
+    params.hh = 0;
+    params.L = 0;
+    params.l = 0;
+    params.ll = 0;
+    params.precision = 6;
+    return (params);
+}
+
+static t_orgi      save_this(const char *format, int nargs, t_orgi params)
+{
 
     params.type = format[nargs - 1];
-    get_modifier(format, nargs, params);
+    params = null_all(params);
+    if (params.type == 'f')
+        params = check_precision(format, nargs, params);
+    params = get_width(format, nargs, params);
+    params = get_modifier(format, nargs, params);
     return (params);
 }
 
@@ -46,7 +74,6 @@ int             ft_printf(const char *format, ...)
 
     done = 0;
     va_start(args, format);
-
     while (*format)
     {
         if (*format != '%')
@@ -58,7 +85,7 @@ int             ft_printf(const char *format, ...)
         {
             format++;
             nargs = count_args(format);
-            params = save_this(format, nargs);
+            params = save_this(format, nargs, params);
             done += parse_this(args, params);
             format += nargs - 1;
         }

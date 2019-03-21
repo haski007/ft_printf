@@ -12,7 +12,26 @@
 
 #include "../includes/ft_printf.h"
 
-void                get_modifier(const char *format, int nargs, t_orgi params)
+t_orgi        get_width(const char *format, int nargs, t_orgi params)
+{
+    char    *str;
+    int     i;
+
+    i = 0;
+    str = ft_strndup(format, nargs);
+    while (i < nargs)
+    {
+        if (str[i] > 47 && str[i] < 58 && str[i - 1] != '.')
+        {
+            params.width = ft_atoi(str + i);
+            break;
+        }
+        i++;
+    }
+    return (params);
+}
+
+t_orgi        get_modifier(const char *format, int nargs, t_orgi params)
 {
     if (format[nargs - 2] == 'h')
     {
@@ -30,7 +49,7 @@ void                get_modifier(const char *format, int nargs, t_orgi params)
     }
     else if (format[nargs - 2] == 'L')
         params.L = 1;
-    return (0);
+    return (params);
 }
 
 int                  parse_this(va_list var, t_orgi params)
@@ -53,6 +72,6 @@ int                  parse_this(va_list var, t_orgi params)
     else if (params.type == 'p')
         len += p_type(var);
     else if (params.type == 'f')
-        len += f_type(var);
+        len += f_type(var, params);
     return (len);
 }

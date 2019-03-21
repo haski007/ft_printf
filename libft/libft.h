@@ -6,7 +6,7 @@
 /*   By: jrameau <jrameau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 21:30:24 by jrameau           #+#    #+#             */
-/*   Updated: 2019/01/29 18:29:41 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/03/21 17:04:05 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int					ft_sqrt(int nb);
 int					ft_numlen(int n);
 void				ft_free_arr(void ***array);
 void				ft_foreach(int *tab, int length, void (*f)(int));
-int					ft_power(int nb, int pow);
+long long int		ft_power(long long int nb, int pow);
 void				ft_del(void *content, size_t content_size);
+char				*floatoa(long double num, unsigned int precision);
 
 #endif
