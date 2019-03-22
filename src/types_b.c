@@ -46,18 +46,28 @@ int         p_type(va_list var)
     adress = ft_strjoin("0x", str);
     ft_putstr(adress);
     adresslen = ft_strlen(adress);
+    free(str);
     free(adress);
     return (adresslen);
 }
 
-int         f_type(va_list var, t_orgi params)
+int         f_type(va_list var, t_orgi *params)
 {
     char    *str;
+    char    *tmp;
+    int     len;
     
-    if (params.L == 1)
-        str = floatoa(va_arg(var, long double), params.precision);
+    if (params->L == 1)
+        str = floatoa(va_arg(var, long double), params->precision);
     else
-        str = floatoa(va_arg(var, double), params.precision);
-    ft_putstr(str);
-    return (ft_strlen(str));
+        str = floatoa(va_arg(var, double), params->precision);
+    if ((len = params->width - ft_strlen(str)) > 0)
+    {
+        tmp = ft_strnew(len);
+        tmp = ft_strcat(ft_memset(tmp, ' ', len), str);
+    }
+    ft_putstr(tmp);
+    len = ft_strlen(tmp);
+    free(str);
+    return (len);
 }

@@ -21,27 +21,28 @@
 
 typedef struct		s_orgi
 {
-    unsigned int    h;
-    unsigned int    hh;
-    unsigned int    l;
-    unsigned int    ll;
-    unsigned int    L;
+    char            h;
+    char            hh;
+    char            l;
+    char            ll;
+    char            L;
+    char            dot;
     unsigned int    precision;
     unsigned int    width;
 	char            type;
 }					t_orgi;
 
 int					ft_printf(const char *format, ...);
-int					parse_this(va_list var, t_orgi params);
-int					s_type(char *str);
+int					parse_this(va_list var, t_orgi *params);
+int					s_type(char *str, t_orgi *params);
 int					c_type(char c);
-int					d_type(int nb);
+int					d_type(int nb, t_orgi *params);
 int					o_type(int nb);
 int					u_type(unsigned int nb);
 int					x_type(int nb, char res);
 int					p_type(va_list var);
-int                 f_type(va_list var, t_orgi params);
-t_orgi              get_modifier(const char *format, int nargs, t_orgi params);
-t_orgi              get_width(const char *format, int nargs, t_orgi params);
+int                 f_type(va_list var, t_orgi *params);
+void                get_modifier(const char *format, int nargs, t_orgi *params);
+void                get_width(const char *format, int nargs, t_orgi *params);
 
 #endif

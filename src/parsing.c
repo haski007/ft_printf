@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-t_orgi        get_width(const char *format, int nargs, t_orgi params)
+void        get_width(const char *format, int nargs, t_orgi *params)
 {
     char    *str;
     int     i;
@@ -23,55 +23,54 @@ t_orgi        get_width(const char *format, int nargs, t_orgi params)
     {
         if (str[i] > 47 && str[i] < 58 && str[i - 1] != '.')
         {
-            params.width = ft_atoi(str + i);
+            params->width = ft_atoi(str + i);
             break;
         }
         i++;
     }
-    return (params);
+    free(str);
 }
 
-t_orgi        get_modifier(const char *format, int nargs, t_orgi params)
+void        get_modifier(const char *format, int nargs, t_orgi *params)
 {
     if (format[nargs - 2] == 'h')
     {
         if (format[nargs - 3] != 'h')
-            params.h = 1;
+            params->h = 1;
         else if (format[nargs - 3] == 'h')
-            params.hh = 1;
+            params->hh = 1;
     }
     else if (format[nargs - 2] == 'l')
     {
         if (format[nargs - 3] != 'l')
-            params.l = 1;
+            params->l = 1;
         else if (format[nargs - 3] == 'l')
-            params.ll = 1;
+            params->ll = 1;
     }
     else if (format[nargs - 2] == 'L')
-        params.L = 1;
-    return (params);
+        params->L = 1;
 }
 
-int                  parse_this(va_list var, t_orgi params)
+int                  parse_this(va_list var, t_orgi *params)
 {
     int     len;
 
     len = 0;
-    if (params.type == 'c')
+    if (params->type == 'c')
         len += c_type(va_arg(var, int));
-    else if (params.type == 's')
-        len += s_type(va_arg(var, char*));
-    else if (params.type == 'd' || params.type == 'i')
-        len += d_type(va_arg(var, int));
-    else if (params.type == 'o')
+    else if (params->type == 's')
+        len += s_type(va_arg(var, char*), params);
+    else if (params->type == 'd' || params->type == 'i')
+        len += d_type(va_arg(var, int), params);
+    else if (params->type == 'o')
         len += o_type(va_arg(var, int));
-    else if (params.type == 'u')
+    else if (params->type == 'u')
         len += u_type(va_arg(var, int));
-    else if (params.type == 'x' || params.type == 'X')
-        len += x_type(va_arg(var, int), params.type);
-    else if (params.type == 'p')
+    else if (params->type == 'x' || params->type == 'X')
+        len += x_type(va_arg(var, int), params->type);
+    else if (params->type == 'p')
         len += p_type(var);
-    else if (params.type == 'f')
+    else if (params->type == 'f')
         len += f_type(var, params);
     return (len);
 }

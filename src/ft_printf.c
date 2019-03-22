@@ -12,41 +12,35 @@
 
 #include "../includes/ft_printf.h"
 
-static t_orgi        check_precision(const char *format, int nargs, t_orgi params)
+static void       check_precision(const char *format, int nargs, t_orgi *params)
 {
     char *str;
 
     str = ft_strndup(format, nargs);
     while (str[--nargs])
     {
-        if (str[nargs] == '.' && str[nargs + 1] > 47
-         && str[nargs + 1] < 58)
-            params.precision = ft_atoi(str + 1 + nargs);
+        if (str[nargs] == '.')
+        {
+            params->dot = 1;
+            params->precision = ft_atoi(str + 1 + nargs);
+        }
     }
-    return (params);
+    free(str);
 }
 
-static t_orgi        null_all(t_orgi params)
+static void        null_all(t_orgi *params)
 {
-    params.h = 0;
-    params.hh = 0;
-    params.L = 0;
-    params.l = 0;
-    params.ll = 0;
-    params.precision = 6;
-    return (params);
+    ft_bzero(params, sizeof(t_orgi));
+    params->precision = 6;
 }
 
-static t_orgi      save_this(const char *format, int nargs, t_orgi params)
+static void      save_this(const char *format, int nargs, t_orgi *params)
 {
-
-    params.type = format[nargs - 1];
-    params = null_all(params);
-    if (params.type == 'f')
-        params = check_precision(format, nargs, params);
-    params = get_width(format, nargs, params);
-    params = get_modifier(format, nargs, params);
-    return (params);
+    null_all(params);
+    params->type = format[nargs - 1];
+    check_precision(format, nargs, params);
+    get_width(format, nargs, params);
+    get_modifier(format, nargs, params);
 }
 
 static int      count_args(const char *format)
@@ -67,10 +61,10 @@ static int      count_args(const char *format)
 
 int             ft_printf(const char *format, ...)
 {
-    va_list args;
-    int     nargs;
-    t_orgi  params;
-    int     done;
+    va_list     args;
+    int         nargs;
+    t_orgi      params;
+    int         done;
 
     done = 0;
     va_start(args, format);
@@ -85,11 +79,13 @@ int             ft_printf(const char *format, ...)
         {
             format++;
             nargs = count_args(format);
-            params = save_this(format, nargs, params);
-            done += parse_this(args, params);
+            save_this(format, nargs, &params);
+            done += parse_this(args, &params);
             format += nargs - 1;
         }
         format++;
     }
+    printf("Precision = %d\n", params.precision);
+    printf("Width = %d\n", params.width);
     return (done);
 }

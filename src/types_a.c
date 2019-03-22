@@ -29,20 +29,47 @@ int             o_type(int nb)
     return((based < 0) ? ft_numlen(based) + 1 : ft_numlen(based));
 }
 
-int             d_type(int nb)
+int             d_type(int nb, t_orgi *params)
 {
+    char    *str;
+    char    *tmp;
+    int     len;
+
     if (!nb)
         return (0);
-    ft_putnbr(nb);
-    return ((nb < 0) ? ft_numlen(nb) + 1 : ft_numlen(nb));
+    str = ft_itoa(nb);
+    if ((len = params->width - ft_strlen(str) > 0))
+    {
+        tmp = ft_strnew(len);
+        str = ft_strcat(ft_memset(tmp, ' ', len), str);
+    }
+    ft_putstr(str);
+    len = ft_strlen(str);
+    free(str);
+    return (len);
 }
 
-int             s_type(char *str)
+int             s_type(char *str, t_orgi *params)
 {
+    int     len;
+    char    *tmp;
+
     if(!str)
         return (0);
+    if (params->dot)
+        str = ft_strndup(str, params->precision);
+    if (params->width)
+    {
+        if ((len = params->width - ft_strlen(str)) > 0)
+        {
+            tmp = ft_strnew(len);
+            str = ft_strcat(ft_memset(tmp, ' ', len), str);
+            free(tmp);
+        }
+    }
     ft_putstr(str);
-    return (ft_strlen(str));
+    len = ft_strlen(str);
+    return (len);
 }     
 
 int             c_type(char c)

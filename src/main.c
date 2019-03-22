@@ -20,9 +20,9 @@ int         main(void)
     int     *b = &a;
  //   unsigned short int  num = 3267;
 
-    my_result = ft_printf("MY test |||||||%hhp ---- %lc ----- %55.3f*\n", b, 'O', 444.1234);
-    org_result = printf("Original|||||||%p ---- %c ----- %-10.3f*\n", b, 'O', 444.1234);
+    my_result = ft_printf("MY test |||||||%hhp ---- %lc ----- %50d*\n", b, 'O', 512);
+    org_result = printf("Original|||||||%p ---- %c ----- %50d*\n", b, 'O', 512);
     printf("\n\nMy result - %d\n", my_result);
-    printf("Original reuslt - %d\n", org_result);
+    printf("Original result - %d\n", org_result);
     return (0);
 }
