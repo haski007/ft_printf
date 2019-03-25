@@ -11,63 +11,71 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int         x_type(int nb, char reg)
+/*
+static char *make_me_adress(char *str)
 {
-    char    *str;
+    char    *adress;
     int     i;
 
     i = -1;
-    str = itoa_base(nb, 16);
-    if (reg == 'X')
-        ft_putstr(str);
-    else
-    {
-       while(str[++i])
-           if (str[i] > 64 && str[i] < 91)
-                str[i] += 32;
-       ft_putstr(str);
-    }
-    return (ft_strlen(str));
+    adress = ft_strnew(ft_strlen(str) + 2);
+    adress[0] = '0';
+    adress[1] = 'x';
+    while (str[++i])
+        adress[i + 2] = str[i];
+    return (adress);
 }
-
-int         p_type(va_list var)
+*/
+int         x_type(int nb, t_orgi *params)
 {
     char    *str;
-    char    *adress;
-    int     adresslen;
+    int     i;
+    char    *tmp;
+
+    i = -1;
+    str = itoa_base(nb, 16);
+    tmp = str;
+    free(str);
+    if (params->type == 'x')
+    {
+       while(tmp[++i])
+           if (tmp[i] > 64 && str[i] < 91)
+                tmp[i] += 32;
+    }
+    tmp = implement_width(str, params->width);
+    ft_putstr(tmp);
+    return (ft_strlen(tmp));
+}
+
+int         p_type(va_list var, t_orgi *params)
+{
+    char    *str;
+    char    *tmp;
     int     i;
 
-    i = 0;
+    i = -1;
     str = itoa_base(va_arg(var, long long unsigned int), 16);
     while(str[++i])
-        if (str[i] > 64 && str[i] < 91)
-            str[i] += 32;
-    adress = ft_strjoin("0x", str);
-    ft_putstr(adress);
-    adresslen = ft_strlen(adress);
+        str[i] = ft_tolower(str[i]);
+    tmp = ft_strjoin("0x", str);
     free(str);
-    free(adress);
-    return (adresslen);
+    tmp = implement_width(tmp, params->width);
+    ft_putstr(tmp);
+    return (ft_strlen(tmp));
 }
 
 int         f_type(va_list var, t_orgi *params)
 {
     char    *str;
     char    *tmp;
-    int     len;
     
     if (params->L == 1)
         str = floatoa(va_arg(var, long double), params->precision);
     else
         str = floatoa(va_arg(var, double), params->precision);
-    if ((len = params->width - ft_strlen(str)) > 0)
-    {
-        tmp = ft_strnew(len);
-        tmp = ft_strcat(ft_memset(tmp, ' ', len), str);
-    }
-    ft_putstr(tmp);
-    len = ft_strlen(tmp);
+    tmp = str;
     free(str);
-    return (len);
+    tmp = implement_width(str, params->width);
+    ft_putstr(tmp);
+    return (ft_strlen(tmp));
 }

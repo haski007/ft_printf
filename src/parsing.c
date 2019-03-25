@@ -12,6 +12,20 @@
 
 #include "../includes/ft_printf.h"
 
+char        *implement_width(char *str, int width)
+{
+    char    *tmp;
+    int     len;
+
+    if (width && (len = width - ft_strlen(str)) > 0)
+    {
+        tmp = ft_strnew(len);
+        str = ft_strcat(ft_memset(tmp, ' ', len), str);
+        free(tmp);
+    }
+    return (str);
+}
+
 void        get_width(const char *format, int nargs, t_orgi *params)
 {
     char    *str;
@@ -67,9 +81,9 @@ int                  parse_this(va_list var, t_orgi *params)
     else if (params->type == 'u')
         len += u_type(va_arg(var, int));
     else if (params->type == 'x' || params->type == 'X')
-        len += x_type(va_arg(var, int), params->type);
+        len += x_type(va_arg(var, int), params);
     else if (params->type == 'p')
-        len += p_type(var);
+        len += p_type(var, params);
     else if (params->type == 'f')
         len += f_type(var, params);
     return (len);

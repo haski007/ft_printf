@@ -20,9 +20,10 @@ int         main(void)
     int     *b = &a;
  //   unsigned short int  num = 3267;
 
-    my_result = ft_printf("MY test |||||||%hhp ---- %lc ----- %50d*\n", b, 'O', 512);
-    org_result = printf("Original|||||||%p ---- %c ----- %50d*\n", b, 'O', 512);
+    my_result = ft_printf("MY test |||||||%50p*\n", b);
+    org_result = printf("Original|||||||%50p*\n", b);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
+    system("leaks ft_printf");
     return (0);
 }

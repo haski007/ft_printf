@@ -33,43 +33,26 @@ int             d_type(int nb, t_orgi *params)
 {
     char    *str;
     char    *tmp;
-    int     len;
 
     if (!nb)
         return (0);
     str = ft_itoa(nb);
-    if ((len = params->width - ft_strlen(str) > 0))
-    {
-        tmp = ft_strnew(len);
-        str = ft_strcat(ft_memset(tmp, ' ', len), str);
-    }
-    ft_putstr(str);
-    len = ft_strlen(str);
+    tmp = str;
     free(str);
-    return (len);
+    tmp = implement_width(str, params->width);
+    ft_putstr(tmp);
+    return (ft_strlen(tmp));
 }
 
 int             s_type(char *str, t_orgi *params)
 {
-    int     len;
-    char    *tmp;
-
     if(!str)
         return (0);
     if (params->dot)
         str = ft_strndup(str, params->precision);
-    if (params->width)
-    {
-        if ((len = params->width - ft_strlen(str)) > 0)
-        {
-            tmp = ft_strnew(len);
-            str = ft_strcat(ft_memset(tmp, ' ', len), str);
-            free(tmp);
-        }
-    }
+    str = implement_width(str, params->width);
     ft_putstr(str);
-    len = ft_strlen(str);
-    return (len);
+    return (ft_strlen(str));
 }     
 
 int             c_type(char c)

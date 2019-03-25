@@ -39,10 +39,11 @@ int					c_type(char c);
 int					d_type(int nb, t_orgi *params);
 int					o_type(int nb);
 int					u_type(unsigned int nb);
-int					x_type(int nb, char res);
-int					p_type(va_list var);
+int					x_type(int nb, t_orgi *params);
+int					p_type(va_list var, t_orgi *params);
 int                 f_type(va_list var, t_orgi *params);
 void                get_modifier(const char *format, int nargs, t_orgi *params);
 void                get_width(const char *format, int nargs, t_orgi *params);
+char                *implement_width(char *str, int width);
 
 #endif
