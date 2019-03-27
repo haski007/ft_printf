@@ -6,7 +6,7 @@
 #    By: pdemian <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/27 15:55:01 by pdemian           #+#    #+#              #
-#    Updated: 2019/03/22 16:45:00 by pdemian          ###   ########.fr        #
+#    Updated: 2019/03/26 18:11:26 by pdemian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ SRCS :=		ft_memset.c \
 				itoa_base.c \
 				floatoa.c \
 				ft_strndup.c \
+				ft_strrew.c \
 				ft_del.c
 
 OBJS :=		$(addprefix $(OBJDIR), $(SRCS:%.c=%.o))

@@ -18,12 +18,11 @@ int         main(void)
     int     org_result;
     int     a = 1999;
     int     *b = &a;
- //   unsigned short int  num = 3267;
 
-    my_result = ft_printf("MY test |||||||%50p*\n", b);
-    org_result = printf("Original|||||||%50p*\n", b);
+    my_result = ft_printf("MY test |||||||%50p ---- %-44c ----- %22ld*\n", b, 'O', 123456789001222221);
+    org_result = printf("Original|||||||%50p ---- %-44c ----- %22ld*\n", b, 'O', 123456789001222221);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
-    system("leaks ft_printf");
+  //  system("leaks ft_printf");
     return (0);
 }

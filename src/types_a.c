@@ -12,53 +12,67 @@
 
 #include "../includes/ft_printf.h"
 
-int             u_type(unsigned int nb)
-{
-    if (!nb)
-        return (0);
-    ft_putnbr(nb);
-    return (ft_numlen(nb));   
-}
-
-int             o_type(int nb)
-{
-    int based;
-
-    based = ft_atoi(itoa_base(nb, 8));
-    ft_putnbr(based);
-    return((based < 0) ? ft_numlen(based) + 1 : ft_numlen(based));
-}
-
-int             d_type(int nb, t_orgi *params)
+char             *u_type(unsigned int nb, t_orgi *params)
 {
     char    *str;
-    char    *tmp;
 
     if (!nb)
         return (0);
     str = ft_itoa(nb);
-    tmp = str;
-    free(str);
-    tmp = implement_width(str, params->width);
-    ft_putstr(tmp);
-    return (ft_strlen(tmp));
+    str = implement_width(str, params->width, params);
+    return (str);
 }
 
-int             s_type(char *str, t_orgi *params)
+char             *o_type(int nb, t_orgi *params)
+{
+    char    *str;
+
+    str = itoa_base(nb, 8);
+    if (params->flag == '#')
+        str = paste_start(str, '0');
+    str = implement_width(str, params->width, params);
+    return(str);
+}
+
+char             *d_type(va_list var, t_orgi *params)
+{
+    char    *str;
+    char    *tmp;
+    long long int     nb;
+
+    nb = (params->l == 1) ? va_arg(var, long long int) : va_arg(var, int);
+    if (nb == 0 && params->flag == '+')
+        str = ft_strdup("+0");
+    else if (params->flag == '+' && nb > -1)
+    {
+        str = ft_itoa(-nb);
+        str[0] = '+';
+    }
+    else
+        str = ft_itoa(nb);
+    tmp = str;
+    free(str);
+    tmp = implement_width(str, params->width, params);
+    return (tmp);
+}
+
+char            *s_type(char *str, t_orgi *params)
 {
     if(!str)
         return (0);
     if (params->dot)
         str = ft_strndup(str, params->precision);
-    str = implement_width(str, params->width);
-    ft_putstr(str);
-    return (ft_strlen(str));
+    str = implement_width(str, params->width, params);
+    return (str);
 }     
 
-int             c_type(char c)
+char             *c_type(char c, t_orgi *params)
 {
-    if (!c)
-        return (0);
-    ft_putchar(c);
-    return (1);
+    char    *str;
+
+    str = (char*)malloc(sizeof(char) * 2);
+    str[1] = '\0';
+    str[0] = c;
+    str = implement_width(str, params->width, params);
+    return (str);
 }

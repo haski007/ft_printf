@@ -6,7 +6,7 @@
 /*   By: jrameau <jrameau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 21:30:24 by jrameau           #+#    #+#             */
-/*   Updated: 2019/03/22 16:44:47 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/03/26 18:11:48 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-char				*ft_itoa(int n);
+char				*ft_itoa(long long int n);
 int					ft_atoi(const char *str);
 
 void				*ft_memalloc(size_t size);
@@ -118,5 +118,6 @@ void				ft_foreach(int *tab, int length, void (*f)(int));
 long long int		ft_power(long long int nb, int pow);
 void				ft_del(void *content, size_t content_size);
 char				*floatoa(long double num, unsigned int precision);
+char				*ft_strrew(char *src);
 
 #endif

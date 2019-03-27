@@ -12,16 +12,25 @@
 
 #include "../includes/ft_printf.h"
 
-char        *implement_width(char *str, int width)
+void        null_all(t_orgi *params)
+{
+    ft_bzero(params, sizeof(t_orgi));
+    params->precision = 6;
+}
+
+char        *implement_width(char *str, int width, t_orgi *params)
 {
     char    *tmp;
     int     len;
 
+    str = ft_strdup(str);
     if (width && (len = width - ft_strlen(str)) > 0)
     {
         tmp = ft_strnew(len);
-        str = ft_strcat(ft_memset(tmp, ' ', len), str);
-        free(tmp);
+        if (params->flag == '-')
+            str = ft_strcat(str, ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len));
+        else    
+            str = ft_strcat(ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len), str);
     }
     return (str);
 }
@@ -29,20 +38,22 @@ char        *implement_width(char *str, int width)
 void        get_width(const char *format, int nargs, t_orgi *params)
 {
     char    *str;
+    char    *tmp;
     int     i;
 
     i = 0;
     str = ft_strndup(format, nargs);
+    tmp = str;
+    free(str);
     while (i < nargs)
     {
-        if (str[i] > 47 && str[i] < 58 && str[i - 1] != '.')
+        if (tmp[i] > 47 && tmp[i] < 58 && tmp[i - 1] != '.')
         {
-            params->width = ft_atoi(str + i);
+            params->width = ft_atoi(tmp + i);
             break;
         }
         i++;
     }
-    free(str);
 }
 
 void        get_modifier(const char *format, int nargs, t_orgi *params)
@@ -65,26 +76,27 @@ void        get_modifier(const char *format, int nargs, t_orgi *params)
         params->L = 1;
 }
 
-int                  parse_this(va_list var, t_orgi *params)
+char                 *parse_this(va_list var, t_orgi *params)
 {
-    int     len;
+    char    *res;
 
-    len = 0;
+    res = NULL;
     if (params->type == 'c')
-        len += c_type(va_arg(var, int));
+        res = c_type(va_arg(var, int), params);
     else if (params->type == 's')
-        len += s_type(va_arg(var, char*), params);
+        res = s_type(va_arg(var, char*), params);
     else if (params->type == 'd' || params->type == 'i')
-        len += d_type(va_arg(var, int), params);
+        res = d_type(var, params);
     else if (params->type == 'o')
-        len += o_type(va_arg(var, int));
+        res = o_type(va_arg(var, int), params);
     else if (params->type == 'u')
-        len += u_type(va_arg(var, int));
+        res = u_type(va_arg(var, int), params);
     else if (params->type == 'x' || params->type == 'X')
-        len += x_type(va_arg(var, int), params);
+        res = x_type(va_arg(var, int), params);
     else if (params->type == 'p')
-        len += p_type(var, params);
+        res = p_type(var, params);
     else if (params->type == 'f')
-        len += f_type(var, params);
-    return (len);
+        res = f_type(var, params);
+    ft_putstr(res);
+    return (res);
 }

@@ -25,19 +25,13 @@ static void       check_precision(const char *format, int nargs, t_orgi *params)
             params->precision = ft_atoi(str + 1 + nargs);
         }
     }
-    free(str);
-}
-
-static void        null_all(t_orgi *params)
-{
-    ft_bzero(params, sizeof(t_orgi));
-    params->precision = 6;
 }
 
 static void      save_this(const char *format, int nargs, t_orgi *params)
 {
     null_all(params);
     params->type = format[nargs - 1];
+    params->flag = (ft_strchr("#0-+ ", format[0])) ? format[0] : 0;
     check_precision(format, nargs, params);
     get_width(format, nargs, params);
     get_modifier(format, nargs, params);
@@ -80,7 +74,7 @@ int             ft_printf(const char *format, ...)
             format++;
             nargs = count_args(format);
             save_this(format, nargs, &params);
-            done += parse_this(args, &params);
+            done += ft_strlen(parse_this(args, &params));
             format += nargs - 1;
         }
         format++;

@@ -29,21 +29,24 @@ typedef struct		s_orgi
     char            dot;
     unsigned int    precision;
     unsigned int    width;
+    char            flag;
 	char            type;
 }					t_orgi;
 
 int					ft_printf(const char *format, ...);
-int					parse_this(va_list var, t_orgi *params);
-int					s_type(char *str, t_orgi *params);
-int					c_type(char c);
-int					d_type(int nb, t_orgi *params);
-int					o_type(int nb);
-int					u_type(unsigned int nb);
-int					x_type(int nb, t_orgi *params);
-int					p_type(va_list var, t_orgi *params);
-int                 f_type(va_list var, t_orgi *params);
+char			    *parse_this(va_list var, t_orgi *params);
+char			    *s_type(char *str, t_orgi *params);
+char			    *c_type(char c, t_orgi *params);
+char			    *d_type(va_list var, t_orgi *params);
+char			    *o_type(int nb, t_orgi *params);
+char			    *u_type(unsigned int nb, t_orgi *params);
+char			    *x_type(int nb, t_orgi *params);
+char			    *p_type(va_list var, t_orgi *params);
+char                *f_type(va_list var, t_orgi *params);
 void                get_modifier(const char *format, int nargs, t_orgi *params);
 void                get_width(const char *format, int nargs, t_orgi *params);
-char                *implement_width(char *str, int width);
+char                *implement_width(char *str, int width, t_orgi *params);
+void                null_all(t_orgi *params);
+char                *paste_start(char *str, char c);
 
 #endif

@@ -24,7 +24,7 @@ LFLAGS :=	-lft -L $(LIBDIR)
 
 LIB :=		$(LIBDIR)libft.a
 INC :=		ft_printf
-SRC :=		ft_printf main parsing types_a types_b
+SRC :=		ft_printf main parsing types_a types_b x_type
 #liba lib
 
 INCS :=		$(addprefix $(INCDIR), $(addsuffix .h, $(INC)))
