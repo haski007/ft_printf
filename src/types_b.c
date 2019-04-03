@@ -53,8 +53,8 @@ char         *f_type(va_list var, t_orgi *params)
         str = floatoa(va_arg(var, long double), params->precision);
     else
         str = floatoa(va_arg(var, double), params->precision);
-    if (str[0] != '-' && params->flag == '+')
-        str = paste_start(str, '+');
+    if (str[0] != '-' && (params->flag == '+' || params->flag == ' '))
+        str =  (params->flag == '+') ? paste_start(str, '+') : paste_start(str, ' ');
     tmp = str;
     free(str);
     tmp = implement_width(str, params->width, params);

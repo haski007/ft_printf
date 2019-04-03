@@ -12,22 +12,30 @@
 
 #include "../includes/ft_printf.h"
 
-char             *u_type(unsigned int nb, t_orgi *params)
+char             *u_type( t_orgi *params, va_list var)
 {
     char    *str;
 
-    if (!nb)
-        return (0);
-    str = ft_itoa(nb);
+    if (params->l)
+        str = ft_itoa(va_arg(var, unsigned long));
+    else if (params->ll)
+        str = ft_itoa(va_arg(var, unsigned long long));
+    else 
+        str = ft_itoa(va_arg(var, int));
     str = implement_width(str, params->width, params);
     return (str);
 }
 
-char             *o_type(int nb, t_orgi *params)
+char             *o_type(va_list var, t_orgi *params)
 {
-    char    *str;
+    char            *str;
 
-    str = itoa_base(nb, 8);
+    if (params->l)
+        str = itoa_base(va_arg(var, unsigned long), 8);
+    else if (params->ll)
+        str = itoa_base(va_arg(var, unsigned long long), 8);
+    else 
+        str = itoa_base(va_arg(var, int), 8);
     if (params->flag == '#')
         str = paste_start(str, '0');
     str = implement_width(str, params->width, params);
@@ -40,13 +48,18 @@ char             *d_type(va_list var, t_orgi *params)
     char    *tmp;
     long long int     nb;
 
-    nb = (params->l == 1) ? va_arg(var, long long int) : va_arg(var, int);
+    if (params->l)
+        nb = va_arg(var, unsigned long);
+    else if (params->ll)
+        nb = va_arg(var, unsigned long long);
+    else 
+        nb = va_arg(var, int);
     if (nb == 0 && params->flag == '+')
         str = ft_strdup("+0");
-    else if (params->flag == '+' && nb > -1)
+    else if ((params->flag == '+' || params->flag == ' ') && nb > -1)
     {
         str = ft_itoa(-nb);
-        str[0] = '+';
+        str[0] = (params->flag == '+') ? '+' : ' ';
     }
     else
         str = ft_itoa(nb);

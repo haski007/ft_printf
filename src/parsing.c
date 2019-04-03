@@ -76,23 +76,25 @@ void        get_modifier(const char *format, int nargs, t_orgi *params)
         params->L = 1;
 }
 
-char                 *parse_this(va_list var, t_orgi *params)
+char                 *parse_this(va_list var, t_orgi *params, const char *format)
 {
     char    *res;
 
     res = NULL;
-    if (params->type == 'c')
+    if (*format == '%')
+        res = extra_manages(format, params);
+    else if (params->type == 'c')
         res = c_type(va_arg(var, int), params);
     else if (params->type == 's')
         res = s_type(va_arg(var, char*), params);
     else if (params->type == 'd' || params->type == 'i')
         res = d_type(var, params);
     else if (params->type == 'o')
-        res = o_type(va_arg(var, int), params);
+        res = o_type(var, params);
     else if (params->type == 'u')
-        res = u_type(va_arg(var, int), params);
+        res = u_type( params, var);
     else if (params->type == 'x' || params->type == 'X')
-        res = x_type(va_arg(var, int), params);
+        res = x_type(var, params);
     else if (params->type == 'p')
         res = p_type(var, params);
     else if (params->type == 'f')

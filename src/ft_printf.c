@@ -29,6 +29,8 @@ static void       check_precision(const char *format, int nargs, t_orgi *params)
 
 static void      save_this(const char *format, int nargs, t_orgi *params)
 {
+    if (*format == '%')
+        return ;
     null_all(params);
     params->type = format[nargs - 1];
     params->flag = (ft_strchr("#0-+ ", format[0])) ? format[0] : 0;
@@ -42,6 +44,8 @@ static int      count_args(const char *format)
     char    *all_possible;
     int     i;
 
+    if (*format == '%')
+        return(0);
     i = 0;
     all_possible = "cspdioufxX";
     while (format[i])
@@ -74,8 +78,8 @@ int             ft_printf(const char *format, ...)
             format++;
             nargs = count_args(format);
             save_this(format, nargs, &params);
-            done += ft_strlen(parse_this(args, &params));
-            format += nargs - 1;
+            done += ft_strlen(parse_this(args, &params, format));
+            format += (format[0] == '%') ? params.len * 2 - 2: nargs - 1;
         }
         format++;
     }

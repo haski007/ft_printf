@@ -21,6 +21,7 @@
 
 typedef struct		s_orgi
 {
+    int             len;
     char            h;
     char            hh;
     char            l;
@@ -34,13 +35,13 @@ typedef struct		s_orgi
 }					t_orgi;
 
 int					ft_printf(const char *format, ...);
-char			    *parse_this(va_list var, t_orgi *params);
+char			    *parse_this(va_list var, t_orgi *params, const char *format);
 char			    *s_type(char *str, t_orgi *params);
 char			    *c_type(char c, t_orgi *params);
 char			    *d_type(va_list var, t_orgi *params);
-char			    *o_type(int nb, t_orgi *params);
-char			    *u_type(unsigned int nb, t_orgi *params);
-char			    *x_type(int nb, t_orgi *params);
+char			    *o_type(va_list var, t_orgi *params);
+char			    *u_type(t_orgi *params, va_list var);
+char			    *x_type(va_list var, t_orgi *params);
 char			    *p_type(va_list var, t_orgi *params);
 char                *f_type(va_list var, t_orgi *params);
 void                get_modifier(const char *format, int nargs, t_orgi *params);
@@ -48,5 +49,6 @@ void                get_width(const char *format, int nargs, t_orgi *params);
 char                *implement_width(char *str, int width, t_orgi *params);
 void                null_all(t_orgi *params);
 char                *paste_start(char *str, char c);
+char                *extra_manages(const char *format, t_orgi *params);
 
 #endif
