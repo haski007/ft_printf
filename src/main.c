@@ -12,6 +12,14 @@
 
 #include "../includes/ft_printf.h"
 
+void        exit_func(t_orgi *params)
+{
+    //printf("=========%d\n", params->precision);
+    exit(1);
+}
+
+#define ARG "Result|||||||||%.30f-----%%%%------%10.120d\n", 93231.312321, 55
+
 int         main(void)
 {
     int     my_result;
@@ -20,10 +28,10 @@ int         main(void)
     int     *b = &a;
     int     chlen = 45;
 
-    my_result = ft_printf("MY test |||||||%50p --%%%%%%-- %-44c ----- %-12o*\n", b, 'O', chlen);
-    org_result = printf("Original|||||||%50p --%%%%%%-- %-44c ----- %-12o*\n", b, 'O', chlen);
+    my_result = ft_printf(ARG);
+    org_result = printf(ARG);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
-    system("leaks ft_printf");
+//    system("leaks ft_printf");
     return (0);
 }

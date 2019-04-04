@@ -23,6 +23,7 @@ char             *u_type( t_orgi *params, va_list var)
     else 
         str = ft_itoa(va_arg(var, int));
     str = implement_width(str, params->width, params);
+    str = implement_precision(str, params);
     return (str);
 }
 
@@ -39,6 +40,7 @@ char             *o_type(va_list var, t_orgi *params)
     if (params->flag == '#')
         str = paste_start(str, '0');
     str = implement_width(str, params->width, params);
+    str = implement_precision(str, params);
     return(str);
 }
 
@@ -63,8 +65,7 @@ char             *d_type(va_list var, t_orgi *params)
     }
     else
         str = ft_itoa(nb);
-    tmp = str;
-    free(str);
+    str = implement_precision(str, params);
     tmp = implement_width(str, params->width, params);
     return (tmp);
 }
@@ -75,6 +76,8 @@ char            *s_type(char *str, t_orgi *params)
         return (0);
     if (params->dot)
         str = ft_strndup(str, params->precision);
+    else
+        str = ft_strdup(str);
     str = implement_width(str, params->width, params);
     return (str);
 }     

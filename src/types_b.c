@@ -41,6 +41,7 @@ char         *p_type(va_list var, t_orgi *params)
     tmp = ft_strjoin("0x", str);
     free(str);
     tmp = implement_width(tmp, params->width, params);
+// exit_func();
     return (tmp);
 }
 
@@ -49,14 +50,22 @@ char         *f_type(va_list var, t_orgi *params)
     char    *str;
     char    *tmp;
     
-    if (params->L == 1)
-        str = floatoa(va_arg(var, long double), params->precision);
+    if (params->L == 1 && params->precision)
+    {
+        if (params->precision)
+            str = floatoa(va_arg(var, long double), params->precision);
+        else
+            str = floatoa(va_arg(var, long double), 6);
+    }
     else
-        str = floatoa(va_arg(var, double), params->precision);
+    {
+        if (params->precision)
+            str = floatoa(va_arg(var, double), params->precision);
+        else
+            str = floatoa(va_arg(var, double), 6);
+    }
     if (str[0] != '-' && (params->flag == '+' || params->flag == ' '))
         str =  (params->flag == '+') ? paste_start(str, '+') : paste_start(str, ' ');
-    tmp = str;
-    free(str);
     tmp = implement_width(str, params->width, params);
     return (tmp);
 }

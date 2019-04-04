@@ -35,7 +35,7 @@ typedef struct		s_orgi
 }					t_orgi;
 
 int					ft_printf(const char *format, ...);
-char			    *parse_this(va_list var, t_orgi *params, const char *format);
+int 			    parse_this(va_list var, t_orgi *params, const char *format);
 char			    *s_type(char *str, t_orgi *params);
 char			    *c_type(char c, t_orgi *params);
 char			    *d_type(va_list var, t_orgi *params);
@@ -50,5 +50,7 @@ char                *implement_width(char *str, int width, t_orgi *params);
 void                null_all(t_orgi *params);
 char                *paste_start(char *str, char c);
 char                *extra_manages(const char *format, t_orgi *params);
+char                *implement_precision(char *str, t_orgi *params);
+void                exit_func(t_orgi *params);
 
 #endif

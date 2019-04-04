@@ -14,29 +14,29 @@
 
 static void       check_precision(const char *format, int nargs, t_orgi *params)
 {
-    char *str;
-
-    str = ft_strndup(format, nargs);
-    while (str[--nargs])
+    while (format[--nargs])
     {
-        if (str[nargs] == '.')
+        if (format[nargs] == '.')
         {
             params->dot = 1;
-            params->precision = ft_atoi(str + 1 + nargs);
+            params->precision = ft_atoi(format + 1 + nargs);
+            return ;
         }
     }
 }
 
 static void      save_this(const char *format, int nargs, t_orgi *params)
 {
+    static int      i = 0;
     if (*format == '%')
         return ;
-    null_all(params);
+    ft_bzero(params, sizeof(t_orgi));
     params->type = format[nargs - 1];
     params->flag = (ft_strchr("#0-+ ", format[0])) ? format[0] : 0;
     check_precision(format, nargs, params);
     get_width(format, nargs, params);
     get_modifier(format, nargs, params);
+    i++;
 }
 
 static int      count_args(const char *format)
@@ -78,7 +78,7 @@ int             ft_printf(const char *format, ...)
             format++;
             nargs = count_args(format);
             save_this(format, nargs, &params);
-            done += ft_strlen(parse_this(args, &params, format));
+            done += parse_this(args, &params, format);
             format += (format[0] == '%') ? params.len * 2 - 2: nargs - 1;
         }
         format++;

@@ -12,25 +12,39 @@
 
 #include "../includes/ft_printf.h"
 
-void        null_all(t_orgi *params)
+char                *implement_precision(char *str, t_orgi *params)
 {
-    ft_bzero(params, sizeof(t_orgi));
-    params->precision = 6;
+    char    *tmp;
+    char    *res;
+    int     len;
+
+    if (params->precision && (len = params->precision - ft_strlen(str)) > 0)
+    {
+        tmp = ft_strnew(len);
+        res = ft_strjoin(ft_memset(tmp, '0', len), str);
+        free(tmp);
+        free(str);
+        return (res);
+    }
+    return (str);
 }
 
 char        *implement_width(char *str, int width, t_orgi *params)
 {
     char    *tmp;
+    char    *res;
     int     len;
 
-    str = ft_strdup(str);
     if (width && (len = width - ft_strlen(str)) > 0)
     {
         tmp = ft_strnew(len);
         if (params->flag == '-')
-            str = ft_strcat(str, ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len));
+            res = ft_strjoin(str, ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len));
         else    
-            str = ft_strcat(ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len), str);
+            res = ft_strjoin(ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len), str);
+        free(tmp);
+        free(str);
+        return (res);
     }
     return (str);
 }
@@ -76,11 +90,10 @@ void        get_modifier(const char *format, int nargs, t_orgi *params)
         params->L = 1;
 }
 
-char                 *parse_this(va_list var, t_orgi *params, const char *format)
+int                 parse_this(va_list var, t_orgi *params, const char *format)
 {
     char    *res;
 
-    res = NULL;
     if (*format == '%')
         res = extra_manages(format, params);
     else if (params->type == 'c')
@@ -100,5 +113,7 @@ char                 *parse_this(va_list var, t_orgi *params, const char *format
     else if (params->type == 'f')
         res = f_type(var, params);
     ft_putstr(res);
-    return (res);
+    int ret = ft_strlen(res);
+    free(res);
+    return (ret);
 }

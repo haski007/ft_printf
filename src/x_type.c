@@ -43,14 +43,14 @@ char                *x_type(va_list var, t_orgi *params)
         str = itoa_base(va_arg(var, int), 16);
     if (params->flag == '#')
         str = add_0x(str);
-    tmp = str;
-    free(str);
     if (params->type == 'x')
     {
-       while(tmp[++i])
-           if (tmp[i] > 64 && str[i] < 91)
-                tmp[i] += 32;
+       while(str[++i])
+           if (str[i] > 64 && str[i] < 91)
+                str[i] += 32;
     }
-    tmp = implement_width(str, params->width, params);
-    return (tmp);
+    if (params->dot)
+        str = implement_precision(str, params);
+    str = implement_width(str, params->width, params);
+    return (str);
 }
