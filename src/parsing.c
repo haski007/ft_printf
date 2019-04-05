@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 13:52:38 by pdemian           #+#    #+#             */
-/*   Updated: 2019/03/10 13:52:39 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/04/05 20:08:27 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char        *implement_width(char *str, int width, t_orgi *params)
     {
         tmp = ft_strnew(len);
         if (params->flag == '-')
-            res = ft_strjoin(str, ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len));
+            res = ft_strjoin(str, ft_memset(tmp, (params->flag == '0' && !params->dot) ? '0' : ' ', len));
         else    
-            res = ft_strjoin(ft_memset(tmp, (params->flag == '0') ? '0' : ' ', len), str);
+            res = ft_strjoin(ft_memset(tmp, (params->flag == '0' && !params->dot) ? '0' : ' ', len), str);
         free(tmp);
         free(str);
         return (res);
@@ -93,6 +93,7 @@ void        get_modifier(const char *format, int nargs, t_orgi *params)
 int                 parse_this(va_list var, t_orgi *params, const char *format)
 {
     char    *res;
+    int     len;
 
     if (*format == '%')
         res = extra_manages(format, params);
@@ -112,8 +113,10 @@ int                 parse_this(va_list var, t_orgi *params, const char *format)
         res = p_type(var, params);
     else if (params->type == 'f')
         res = f_type(var, params);
+    else
+        return(0);
     ft_putstr(res);
-    int ret = ft_strlen(res);
+    len = ft_strlen(res);
     free(res);
-    return (ret);
+    return (len);
 }

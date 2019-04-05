@@ -46,11 +46,13 @@ char			    *p_type(va_list var, t_orgi *params);
 char                *f_type(va_list var, t_orgi *params);
 void                get_modifier(const char *format, int nargs, t_orgi *params);
 void                get_width(const char *format, int nargs, t_orgi *params);
-char                *implement_width(char *str, int width, t_orgi *params);
 void                null_all(t_orgi *params);
 char                *paste_start(char *str, char c);
 char                *extra_manages(const char *format, t_orgi *params);
+char                *implement_width(char *str, int width, t_orgi *params);
 char                *implement_precision(char *str, t_orgi *params);
-void                exit_func(t_orgi *params);
+char                *implement_plus(long long int nb, t_orgi *params);
+char                *check_on_plus(long long int nb, t_orgi *params);
+void                exit_func();
 
 #endif

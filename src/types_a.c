@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:50:43 by pdemian           #+#    #+#             */
-/*   Updated: 2019/03/18 17:50:46 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/04/05 20:06:55 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ char             *o_type(va_list var, t_orgi *params)
         str = itoa_base(va_arg(var, int), 8);
     if (params->flag == '#')
         str = paste_start(str, '0');
-    str = implement_width(str, params->width, params);
     str = implement_precision(str, params);
+    str = implement_width(str, params->width, params);
     return(str);
 }
 
@@ -58,13 +58,7 @@ char             *d_type(va_list var, t_orgi *params)
         nb = va_arg(var, int);
     if (nb == 0 && params->flag == '+')
         str = ft_strdup("+0");
-    else if ((params->flag == '+' || params->flag == ' ') && nb > -1)
-    {
-        str = ft_itoa(-nb);
-        str[0] = (params->flag == '+') ? '+' : ' ';
-    }
-    else
-        str = ft_itoa(nb);
+    str = implement_plus(nb, params);
     str = implement_precision(str, params);
     tmp = implement_width(str, params->width, params);
     return (tmp);
@@ -92,3 +86,4 @@ char             *c_type(char c, t_orgi *params)
     str = implement_width(str, params->width, params);
     return (str);
 }
+
