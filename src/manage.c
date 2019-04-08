@@ -30,6 +30,8 @@ char                *implement_plus(long long int nb, t_orgi *params)
         res = ft_strjoin(" ", str);
         free(str);
     }
+    else
+        res = str;
     return (res);
 }
 

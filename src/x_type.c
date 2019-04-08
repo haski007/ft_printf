@@ -31,17 +31,19 @@ char                *x_type(va_list var, t_orgi *params)
         str = itoa_base(va_arg(var, unsigned long), 16);
     else if (params->ll)
         str = itoa_base(va_arg(var, unsigned long long), 16);
+    else if (params->h)
+        str = u_itoa_base(va_arg(var, unsigned short int), 16);
+    else if (params->hh)
+        str = u_itoa_base(va_arg(var, unsigned char), 16);
     else 
-        str = itoa_base(va_arg(var, int), 16);
+        str = itoa_base(va_arg(var, unsigned int), 16);
     str = implement_precision(str, params);
-    if (params->flag == '#')
+    if (params->flag == '#' && str[ft_strlen(str) - 1] != '0')
         str = add_0x(str);
     if (params->type == 'x')
-    {
        while(str[++i])
            if (str[i] > 64 && str[i] < 91)
                 str[i] += 32;
-    }
     str = implement_width(str, params->width, params);
     return (str);
 }

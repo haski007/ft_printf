@@ -82,7 +82,6 @@ int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
-char				*itoa_base(long long int num, int base);
 
 # ifndef IS_SPACE
 #  define IS_SPACE(x) (x==' '||x=='\n'||x=='\t')
@@ -119,5 +118,8 @@ long long int		ft_power(long long int nb, int pow);
 void				ft_del(void *content, size_t content_size);
 char				*floatoa(long double num, unsigned int precision);
 char				*ft_strrew(char *src);
+char				*ft_u_itoa(unsigned long long int n);
+char				*itoa_base(long long int num, int base);
+char				*u_itoa_base(unsigned short num, int base);
 
 #endif

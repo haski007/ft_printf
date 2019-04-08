@@ -42,7 +42,7 @@ char				*floatoa(long double num, unsigned int precision)
 	char			*itoa_ret;
 
 	str = ft_strnew(30);
-	if (num < 0)
+	if (num < 0 || num == -0.0)
 	{
 		ft_strcat(str, "-");
 		num = fabs(num);

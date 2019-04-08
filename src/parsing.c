@@ -38,7 +38,7 @@ char        *implement_width(char *str, int width, t_orgi *params)
     if (width && (len = width - ft_strlen(str)) > 0)
     {
         tmp = ft_strnew(len);
-        if (params->flag == '-')
+        if (params->minus == 1)
             res = ft_strjoin(str, ft_memset(tmp, (params->flag == '0' && !params->dot) ? '0' : ' ', len));
         else    
             res = ft_strjoin(ft_memset(tmp, (params->flag == '0' && !params->dot) ? '0' : ' ', len), str);

@@ -31,6 +31,7 @@ typedef struct		s_orgi
     unsigned int    precision;
     unsigned int    width;
     char            flag;
+    char            minus;
 	char            type;
 }					t_orgi;
 

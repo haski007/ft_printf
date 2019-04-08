@@ -32,7 +32,9 @@ static void      save_this(const char *format, int nargs, t_orgi *params)
         return ;
     ft_bzero(params, sizeof(t_orgi));
     params->type = format[nargs - 1];
-    params->flag = (ft_strchr("#0-+ ", format[0])) ? format[0] : 0;
+    params->flag = (ft_strchr("#0+ ", format[0])) ? format[0] : params->flag;
+    params->flag = (ft_strchr("#0+ ", format[1])) ? format[1] : params->flag;
+    params->minus = (format[0] == '-' || format[1]) ? 1 : 0;
     check_precision(format, nargs, params);
     get_width(format, nargs, params);
     get_modifier(format, nargs, params);

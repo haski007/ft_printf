@@ -85,6 +85,8 @@ SRCS :=		ft_memset.c \
 				floatoa.c \
 				ft_strndup.c \
 				ft_strrew.c \
+				ft_u_itoa.c \
+				u_itoa_base.c \
 				ft_del.c
 
 OBJS :=		$(addprefix $(OBJDIR), $(SRCS:%.c=%.o))
