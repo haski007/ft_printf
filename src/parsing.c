@@ -95,8 +95,8 @@ int                 parse_this(va_list var, t_orgi *params, const char *format)
     char    *res;
     int     len;
 
-    if (*format == '%')
-        res = extra_manages(format, params);
+    if (params->type == '%')
+        res = percent_manages(params);
     else if (params->type == 'c')
         res = c_type(va_arg(var, int), params);
     else if (params->type == 's')

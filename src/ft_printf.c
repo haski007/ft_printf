@@ -67,7 +67,7 @@ static int          count_args(const char *format)
     if (*format == '%')
         return(0);
     i = 0;
-    all_possible = "cspdioufxX";
+    all_possible = "cspdio%ufxX";
     while (format[i])
     {
         if ((ft_strchr(all_possible, format[i])))
@@ -99,11 +99,11 @@ int                 ft_printf(const char *format, ...)
             nargs = count_args(format);
             save_this(format, nargs, &params);
             done += parse_this(args, &params, format);
-            format += (format[0] == '%') ? params.len * 2 - 2: nargs - 1;
+            format += nargs - 1;
         }
         format++;
     }
-    printf("Precision = %d\n", params.precision);
-    printf("Width = %d\n", params.width);
+    // printf("Precision = %d\n", params.precision);
+    // printf("Width = %d\n", params.width);
     return (done);
 }

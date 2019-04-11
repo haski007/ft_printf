@@ -68,7 +68,7 @@ char             *d_type(va_list var, t_orgi *params)
         nb = va_arg(var, signed char);
     else 
         nb = va_arg(var, int);
-    if (nb == 0 && params->plus)
+    if (nb == 0 && params->plus == '+')
         str = "+0";
     str = implement_plus(nb, params);
     str = implement_precision(str, params);
@@ -78,14 +78,17 @@ char             *d_type(va_list var, t_orgi *params)
 
 char            *s_type(char *str, t_orgi *params)
 {
+    char    *res;
+
     if(!str)
-        str = ft_strdup("(null)");
+        res = ft_strdup("(null)");
     if (params->dot)
-        str = ft_strndup(str, params->precision);
+        res = (str) ? ft_strndup(str, params->precision) : ft_strndup(res, params->precision);
     else
-        str = ft_strdup(str);
-    str = implement_width(str, params->width, params);
-    return (str);
+        res = (str) ? ft_strdup(str) : ft_strdup(res);
+    res = implement_width(res, params->width, params);
+
+    return (res);
 }     
 
 char             *c_type(char c, t_orgi *params)

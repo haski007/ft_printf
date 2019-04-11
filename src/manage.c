@@ -35,33 +35,12 @@ char                *implement_plus(long long int nb, t_orgi *params)
     return (res);
 }
 
-static char         *many_percent(const char *format, t_orgi *params)
+char                *percent_manages(t_orgi *params)
 {
     char        *str;
-    int         i;
-    int         n;
-
-    n = 0;
-    i = 0;
-    while (format[i] == '%')
-    {
-        if (i % 2 == 0)
-            n++;
-        i++;
-    }
-    str = ft_strnew(n);
-    str = ft_memset(str, '%', n);
-    params->len = n;
-    return (str);
-}
-
-char                *extra_manages(const char *format, t_orgi *params)
-{
-    char *str;
-
-    if (format[0] == '%')
-        str = many_percent(format, params);
-    else
-        return (0);
+    
+    str = ft_strdup("%");
+    str = implement_width(str, params->width, params);
+    str = implement_precision(str, params);
     return (str);
 }
