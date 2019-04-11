@@ -28,10 +28,10 @@ int         main(void)
     int     *b = &a;
     // long long double  chlen = -0;
 
-    my_result = ft_printf("%s\n", "NULL");
-    org_result = printf("%s\n", "NULL");
+    my_result = ft_printf("%#08x\n", 5555);
+    org_result = printf("%#08x\n", 5555);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
-    //  system("leaks ft_printf");
+    //   system("leaks ft_printf");
     return (0);
 }

@@ -55,7 +55,6 @@ char             *o_type(va_list var, t_orgi *params)
 char             *d_type(va_list var, t_orgi *params)
 {
     char                *str;
-    char                *tmp;
     long long int       nb;
 
     if (params->l)
@@ -78,17 +77,16 @@ char             *d_type(va_list var, t_orgi *params)
 
 char            *s_type(char *str, t_orgi *params)
 {
-    char    *res;
-
     if(!str)
-        res = ft_strdup("(null)");
-    if (params->dot)
-        res = (str) ? ft_strndup(str, params->precision) : ft_strndup(res, params->precision);
+        str = ft_strdup("(null)");
+    else if (!str && params->dot)
+        str = ft_strndup("(null)", params->precision);
+    else if (params->dot)
+        str = ft_strndup(str, params->precision);
     else
-        res = (str) ? ft_strdup(str) : ft_strdup(res);
-    res = implement_width(res, params->width, params);
-
-    return (res);
+        str = ft_strdup(str);
+    str = implement_width(str, params->width, params);
+    return (str);
 }     
 
 char             *c_type(char c, t_orgi *params)

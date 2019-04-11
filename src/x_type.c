@@ -38,12 +38,12 @@ char                *x_type(va_list var, t_orgi *params)
     else 
         str = itoa_base(va_arg(var, unsigned int), 16);
     str = implement_precision(str, params);
+    str = (params->sharp) ? implement_width(str, params->width - 2, params) : implement_width(str, params->width, params);
     if (params->sharp && str[ft_strlen(str) - 1] != '0')
         str = add_0x(str);
     if (params->type == 'x')
        while(str[++i])
            if (str[i] > 64 && str[i] < 91)
                 str[i] += 32;
-    str = implement_width(str, params->width, params);
     return (str);
 }
