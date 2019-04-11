@@ -30,8 +30,11 @@ typedef struct		s_orgi
     char            dot;
     unsigned int    precision;
     unsigned int    width;
-    char            flag;
+    char            sharp;
     char            minus;
+    char            zero;
+    char            plus;
+    char            space;
 	char            type;
 }					t_orgi;
 

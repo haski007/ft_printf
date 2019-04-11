@@ -45,7 +45,7 @@ char             *o_type(va_list var, t_orgi *params)
         str = itoa_base(va_arg(var, unsigned char), 8);
     else 
         str = itoa_base(va_arg(var, int), 8);
-    if (params->flag == '#' && str[ft_strlen(str) - 1] != '0')
+    if (params->sharp && str[ft_strlen(str) - 1] != '0')
         str = paste_start(str, '0');
     str = implement_precision(str, params);
     str = implement_width(str, params->width, params);
@@ -68,7 +68,7 @@ char             *d_type(va_list var, t_orgi *params)
         nb = va_arg(var, signed char);
     else 
         nb = va_arg(var, int);
-    if (nb == 0 && params->flag == '+')
+    if (nb == 0 && params->plus)
         str = "+0";
     str = implement_plus(nb, params);
     str = implement_precision(str, params);

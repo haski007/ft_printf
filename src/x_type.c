@@ -38,7 +38,7 @@ char                *x_type(va_list var, t_orgi *params)
     else 
         str = itoa_base(va_arg(var, unsigned int), 16);
     str = implement_precision(str, params);
-    if (params->flag == '#' && str[ft_strlen(str) - 1] != '0')
+    if (params->sharp && str[ft_strlen(str) - 1] != '0')
         str = add_0x(str);
     if (params->type == 'x')
        while(str[++i])

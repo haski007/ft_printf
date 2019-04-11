@@ -20,12 +20,12 @@ char                *implement_plus(long long int nb, t_orgi *params)
     res = NULL;
     str = ft_itoa(nb);
     str = implement_precision(str, params);
-    if (params->flag == '+' && nb > -1)
+    if (params->plus && nb > -1)
     {
         res = ft_strjoin("+", str);
         free(str);
     }
-    else if (params->flag == ' ' && nb > -1)
+    else if (params->space && nb > -1)
     {
         res = ft_strjoin(" ", str);
         free(str);

@@ -12,7 +12,27 @@
 
 #include "../includes/ft_printf.h"
 
-static void       check_precision(const char *format, int nargs, t_orgi *params)
+static void         get_flags(const char *format, int nargs, t_orgi *params)
+{
+    int     i;
+
+    i = -1;
+    while (++i < nargs && (format[i] < '1' || format[i] > '9'))
+    {
+        if (format[i] == '#')
+            params->sharp = 1;
+        else if (format[i] == '0')
+            params->zero = 1;
+        else if (format[i] == '-')
+            params->minus = 1;
+        else if (format[i] == '+')
+            params->plus = 1;
+        else if (format[i] == ' ')
+            params->space = 1;
+    }
+}
+
+static void         check_precision(const char *format, int nargs, t_orgi *params)
 {
     while (format[--nargs])
     {
@@ -25,23 +45,21 @@ static void       check_precision(const char *format, int nargs, t_orgi *params)
     }
 }
 
-static void      save_this(const char *format, int nargs, t_orgi *params)
+static void         save_this(const char *format, int nargs, t_orgi *params)
 {
     static int      i = 0;
     if (*format == '%')
         return ;
     ft_bzero(params, sizeof(t_orgi));
     params->type = format[nargs - 1];
-    params->flag = (ft_strchr("#0+ ", format[0])) ? format[0] : params->flag;
-    params->flag = (ft_strchr("#0+ ", format[1])) ? format[1] : params->flag;
-    params->minus = (format[0] == '-' || format[1]) ? 1 : 0;
+    get_flags(format, nargs, params);
     check_precision(format, nargs, params);
     get_width(format, nargs, params);
     get_modifier(format, nargs, params);
     i++;
 }
 
-static int      count_args(const char *format)
+static int          count_args(const char *format)
 {
     char    *all_possible;
     int     i;
@@ -59,7 +77,7 @@ static int      count_args(const char *format)
     return (0);
 }
 
-int             ft_printf(const char *format, ...)
+int                 ft_printf(const char *format, ...)
 {
     va_list     args;
     int         nargs;
