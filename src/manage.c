@@ -11,17 +11,21 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-char                *implement_plus(char *str, t_orgi *params)
+    
+char                *implement_plus(long long int nb, t_orgi *params)
 {
+    char *str;
     char *res;
 
-    if (params->plus)
+    res = NULL;
+    str = ft_itoa(nb);
+    str = implement_precision(str, params);
+    if (params->plus && nb > -1)
     {
         res = ft_strjoin("+", str);
         free(str);
     }
-    else if (params->space)
+    else if (params->space && nb > -1)
     {
         res = ft_strjoin(" ", str);
         free(str);

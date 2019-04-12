@@ -69,11 +69,9 @@ char             *d_type(va_list var, t_orgi *params)
         nb = va_arg(var, int);
     if (nb == 0 && params->plus == '+')
         str = "+0";
-    str = (nb < 0) ? ft_itoa(-nb) : ft_itoa(nb);
-    str = (nb < 0)  ? implement_width(str, params->width - 1, params)
-     : implement_width(str, params->width, params);
-    str = (nb < 0) ? paste_start(str, '-') : str;
-    str = (nb > -1) ? implement_plus(str, params) : str;
+    str = implement_plus(nb, params);
+    str = implement_precision(str, params);
+    str = implement_width(str, params->width, params);
     return (str);
 }
 
@@ -101,4 +99,3 @@ char             *c_type(char c, t_orgi *params)
     str = implement_width(str, params->width, params);
     return (str);
 }
-

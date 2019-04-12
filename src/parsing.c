@@ -18,8 +18,6 @@ char                *implement_precision(char *str, t_orgi *params)
     char    *res;
     int     len;
 
-    if (str[0] == '0' && params->dot && !str[1] && !params->width)
-        return (ft_strdup(""));
     if (params->precision && (len = params->precision - ft_strlen(str)) > 0)
     {
         tmp = ft_strnew(len);
@@ -41,7 +39,7 @@ char        *implement_width(char *str, int width, t_orgi *params)
     {
         tmp = ft_strnew(len);
         if (params->minus)
-            res = ft_strjoin(str, ft_memset(tmp, (params->zero && !params->dot) ? ' ' : ' ', len));
+            res = ft_strjoin(str, ft_memset(tmp, (params->zero && !params->dot) ? '0' : ' ', len));
         else    
             res = ft_strjoin(ft_memset(tmp, (params->zero && !params->dot) ? '0' : ' ', len), str);
         free(tmp);
@@ -63,11 +61,9 @@ void        get_width(const char *format, int nargs, t_orgi *params)
     free(str);
     while (i < nargs)
     {
-        if (tmp[i] > 48 && tmp[i] < 58 && tmp[i - 1] != '.')
+        if (tmp[i] > 47 && tmp[i] < 58 && tmp[i - 1] != '.')
         {
             params->width = ft_atoi(tmp + i);
-            if (params->plus || params->space)
-                params->width--;
             break;
         }
         i++;
