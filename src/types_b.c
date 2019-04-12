@@ -23,6 +23,8 @@ char        *paste_start(char *str, char c)
         res = ft_strjoin(" ", str);
     else if (c == '0')
         res = ft_strjoin("0", str);
+    else if (c == '-')
+        res = ft_strjoin("-", str);
     free(str);
     return (res);
 }

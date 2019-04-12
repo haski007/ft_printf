@@ -55,7 +55,7 @@ void                null_all(t_orgi *params);
 char                *percent_manages(t_orgi *params);
 char                *implement_width(char *str, int width, t_orgi *params);
 char                *implement_precision(char *str, t_orgi *params);
-char                *implement_plus(long long int nb, t_orgi *params);
+char                *implement_plus(char *str, t_orgi *params);
 char                *check_on_plus(long long int nb, t_orgi *params);
 void                exit_func();
 

@@ -66,7 +66,7 @@ void        get_width(const char *format, int nargs, t_orgi *params)
         if (tmp[i] > 48 && tmp[i] < 58 && tmp[i - 1] != '.')
         {
             params->width = ft_atoi(tmp + i);
-            if (params->plus)
+            if (params->plus || params->space)
                 params->width--;
             break;
         }

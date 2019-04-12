@@ -39,7 +39,7 @@ char                *x_type(va_list var, t_orgi *params)
         str = itoa_base(va_arg(var, unsigned int), 16);
     str = implement_precision(str, params);
     str = (params->sharp && params->zero) ? implement_width(str, params->width - 2, params) : str;
-    if (params->sharp && str[ft_strlen(str) - 1] != '0' && !str)
+    if ((params->sharp && str[ft_strlen(str) - 1] != '0') || !str)
         str = add_0x(str);
     str = (!params->zero || !params->sharp) ? implement_width(str, params->width, params) : str;
     if (params->type == 'x')
