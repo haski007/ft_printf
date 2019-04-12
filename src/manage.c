@@ -12,14 +12,11 @@
 
 #include "../includes/ft_printf.h"
 
-char                *implement_plus(long long int nb, t_orgi *params)
+char                *implement_plus(long long int nb, char *str, t_orgi *params)
 {
-    char *str;
     char *res;
 
     res = NULL;
-    str = ft_itoa(nb);
-    str = implement_precision(str, params);
     if (params->plus && nb > -1)
     {
         res = ft_strjoin("+", str);

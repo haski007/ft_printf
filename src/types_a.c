@@ -67,11 +67,10 @@ char             *d_type(va_list var, t_orgi *params)
         nb = va_arg(var, signed char);
     else 
         nb = va_arg(var, int);
-    if (nb == 0 && params->plus == '+')
-        str = "+0";
-    str = implement_plus(nb, params);
-    str = implement_precision(str, params);
+    str = ((nb == 0 && params->plus == '+')) ? "+0" : ft_itoa(nb);
     str = implement_width(str, params->width, params);
+    str = implement_precision(str, params);
+    str = implement_plus(nb, str, params);
     return (str);
 }
 
