@@ -17,7 +17,9 @@ char                *implement_precision(char *str, t_orgi *params)
     char    *tmp;
     char    *res;
     int     len;
-
+    
+    if (str[0] == '0' && params->dot && !str[1])
+        return (ft_strdup(""));
     if (params->precision && (len = params->precision - ft_strlen(str)) > 0)
     {
         tmp = ft_strnew(len);
@@ -39,7 +41,7 @@ char        *implement_width(char *str, int width, t_orgi *params)
     {
         tmp = ft_strnew(len);
         if (params->minus)
-            res = ft_strjoin(str, ft_memset(tmp, (params->zero && !params->dot) ? '0' : ' ', len));
+            res = ft_strjoin(str, ft_memset(tmp, ' ', len));
         else    
             res = ft_strjoin(ft_memset(tmp, (params->zero && !params->dot) ? '0' : ' ', len), str);
         free(tmp);
