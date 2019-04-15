@@ -28,8 +28,8 @@ int         main(void)
     int     *b = &a;
     // long long double  chlen = -0;
 
-    my_result = ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
-    org_result = printf("@moulitest: %#.x %#.0x\n", 0, 0);
+    my_result = ft_printf("@moulitest: %c\n", 0);
+    org_result = printf("@moulitest: %c\n", 0);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
     //   system("leaks ft_printf");

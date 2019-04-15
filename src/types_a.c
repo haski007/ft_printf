@@ -92,7 +92,7 @@ char            *s_type(char *str, t_orgi *params)
 char             *c_type(char c, t_orgi *params)
 {
     char    *str;
-
+    
     str = (char*)malloc(sizeof(char) * 2);
     str[1] = '\0';
     str[0] = c;

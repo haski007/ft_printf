@@ -16,7 +16,7 @@ static char         *add_0x(char *str)
 {
     char    *res;
 
-    res = ft_strjoin("0x", str);
+    res = ft_strjoin("0X", str);
     free(str);
     return(res);
 }
