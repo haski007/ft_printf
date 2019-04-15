@@ -6,7 +6,7 @@
 /*   By: jrameau <jrameau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 21:30:24 by jrameau           #+#    #+#             */
-/*   Updated: 2019/03/26 18:11:48 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/04/15 19:10:18 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-
 
 # ifndef IS_SPACE
 #  define IS_SPACE(x) (x==' '||x=='\n'||x=='\t')

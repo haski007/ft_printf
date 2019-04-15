@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 18:45:15 by pdemian           #+#    #+#             */
-/*   Updated: 2019/04/08 18:46:41 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/04/15 19:10:02 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static inline int		length(unsigned long long int n)
 
 char					*ft_u_itoa(unsigned long long int n)
 {
-	char				*str;
-	int					len;
+	char						*str;
+	int							len;
 	unsigned long long int		tmp;
 
 	tmp = n;

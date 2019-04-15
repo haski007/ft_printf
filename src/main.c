@@ -27,11 +27,11 @@ int         main(void)
     int     a = 0;
     int     *b = &a;
     // long long double  chlen = -0;
-
-    my_result = ft_printf("%Z");
-    org_result = printf("%Z");
+    
+    my_result = ft_printf("%llx*\n", 3231231231);
+    org_result = printf("%llx\n", 3231231231);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
-    //   system("leaks ft_printf");
+    //   system("leaks ft_printf"); 
     return (0);
 }

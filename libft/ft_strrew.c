@@ -6,11 +6,12 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 18:08:28 by pdemian           #+#    #+#             */
-/*   Updated: 2019/03/26 18:20:21 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/04/15 19:09:13 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 char		*ft_strrew(char *src)
 {
 	char	*str;

@@ -6,45 +6,56 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 18:15:28 by pdemian           #+#    #+#             */
-/*   Updated: 2019/04/05 20:06:07 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/04/15 19:26:11 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static char         *add_0x(char *str)
+static char				*types_manager(va_list var, t_orgi *params)
 {
-    char    *res;
+	char	*str;
 
-    res = ft_strjoin("0X", str);
-    free(str);
-    return(res);
+	if (params->l)
+		str = itoa_base(va_arg(var, unsigned long), 16);
+	else if (params->ll)
+		str = itoa_base(va_arg(var, unsigned long long), 16);
+	else if (params->h)
+		str = u_itoa_base(va_arg(var, unsigned short int), 16);
+	else if (params->hh)
+		str = u_itoa_base(va_arg(var, unsigned char), 16);
+	else
+		str = itoa_base(va_arg(var, unsigned int), 16);
+	return (str);
 }
 
-char                *x_type(va_list var, t_orgi *params)
+static char				*add_0x(char *str)
 {
-    char    *str;
-    int     i;
+	char	*res;
 
-    i = -1;
-    if (params->l)
-        str = itoa_base(va_arg(var, unsigned long), 16);
-    else if (params->ll)
-        str = itoa_base(va_arg(var, unsigned long long), 16);
-    else if (params->h)
-        str = u_itoa_base(va_arg(var, unsigned short int), 16);
-    else if (params->hh)
-        str = u_itoa_base(va_arg(var, unsigned char), 16);
-    else 
-        str = itoa_base(va_arg(var, unsigned int), 16);
-    str = implement_precision(str, params);
-    str = (params->sharp && params->zero) ? implement_width(str, params->width - 2, params) : str;
-    if (params->sharp && str[ft_strlen(str) - 1] != '0' && ft_strlen(str) > 0)
-        str = add_0x(str);
-    str = (!params->zero || !params->sharp) ? implement_width(str, params->width, params) : str;
-    if (params->type == 'x')
-       while(str[++i])
-           if (str[i] > 64 && str[i] < 91)
-                str[i] += 32;
-    return (str);
+	res = ft_strjoin("0X", str);
+	free(str);
+	return (res);
+}
+
+char					*x_type(va_list var, t_orgi *params)
+{
+	char	*str;
+	int		i;
+
+	i = -1;
+	str = types_manager(var, params);
+	str = implement_precision(str, params);
+	str = (params->sharp && params->zero) ?
+		implement_width(str, params->width - 2, params) : str;
+	if (params->sharp && str[ft_strlen(str) - 1] != '0'
+			&& ft_strlen(str) > 0)
+		str = add_0x(str);
+	str = (!params->zero || !params->sharp) ?
+		implement_width(str, params->width, params) : str;
+	if (params->type == 'x')
+		while (str[++i])
+			if (str[i] > 64 && str[i] < 91)
+				str[i] += 32;
+	return (str);
 }
