@@ -22,7 +22,8 @@ char                *implement_plus(long long int nb, t_orgi *params)
     str = implement_precision(str, params);
     if (params->plus && nb > -1)
     {
-        res = ft_strjoin("+", str);
+        res = (params->precision > ft_numlen(nb)) ? ft_strjoin("+", str + 1)
+        : ft_strjoin("+", str);
         free(str);
     }
     else if (params->space && nb > -1)
