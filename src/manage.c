@@ -11,8 +11,23 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-    
-char                *implement_plus(char *str, long long int nb, t_orgi *params)
+
+static char         *implement_minus(char *str, long long int nb, t_orgi *params)
+{
+    char *res;
+
+    res = NULL;
+    if (nb < 0)
+    {
+        res = ft_strjoin("-", str);
+        free(str);
+    }
+    else
+        res = str;
+    return (res);
+}
+
+char                *implement_sign(char *str, long long int nb, t_orgi *params)
 {
     char *res;
 
@@ -30,6 +45,7 @@ char                *implement_plus(char *str, long long int nb, t_orgi *params)
     }
     else
         res = str;
+    res = implement_minus(res, nb, params);
     return (res);
 }
 

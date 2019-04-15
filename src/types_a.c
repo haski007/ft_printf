@@ -69,9 +69,9 @@ char             *d_type(va_list var, t_orgi *params)
         nb = va_arg(var, int);
     if (nb == 0 && params->plus == '+')
         str = "+0";
-    str = ft_itoa(nb);
+    str = (nb > -1) ? ft_itoa(nb) : ft_itoa(-nb);
     str = implement_precision(str, params);
-    str = implement_plus(str, nb, params);
+    str = implement_sign(str, nb, params);
     str = implement_width(str, params->width, params);
     return (str);
 }
