@@ -98,7 +98,6 @@ int                 ft_printf(const char *format, ...)
             format++;
             if (!(nargs = count_args(format)))
             {
-                format++;
                 continue ;
             }
             save_this(format, nargs, &params);
