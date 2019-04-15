@@ -77,14 +77,6 @@ char             *d_type(va_list var, t_orgi *params)
 
 char            *s_type(char *str, t_orgi *params)
 {
-    if(!str)
-        str = ft_strdup("(null)");
-    else if (!str && params->dot)
-        str = ft_strndup("(null)", params->precision);
-    else if (params->dot)
-        str = ft_strndup(str, params->precision);
-    else
-        str = ft_strdup(str);
     str = implement_width(str, params->width, params);
     return (str);
 }     
