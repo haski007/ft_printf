@@ -28,8 +28,8 @@ int         main(void)
     int     *b = &a;
     // long long double  chlen = -0;
 
-    my_result = ft_printf("%+05d\n", 42);
-    org_result = printf("%+05d\n", 42);
+    my_result = ft_printf("%+010.5d\n", 4242);
+    org_result = printf("%+010.5d\n", 4242);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
     //   system("leaks ft_printf");

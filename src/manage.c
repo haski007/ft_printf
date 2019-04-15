@@ -12,25 +12,19 @@
 
 #include "../includes/ft_printf.h"
     
-char                *implement_plus(long long int nb, t_orgi *params)
+char                *implement_plus(char *str, long long int nb, t_orgi *params)
 {
-    char *str;
     char *res;
 
     res = NULL;
-    str = ft_itoa(nb);
-    str = implement_precision(str, params);
-    str = implement_width(str, params->width, params);
     if (params->plus && nb > -1)
     {
-        res = (params->width > ft_numlen(nb) && params->zero) ? ft_strjoin("+", str + 1)
-        : ft_strjoin("+", str);
+        res = ft_strjoin("+", str);
         free(str);
     }
     else if (params->space && nb > -1)
     {
-        res = (params->width > ft_numlen(nb) && params->zero) ? ft_strjoin(" ", str + 1)
-        : ft_strjoin(" ", str);
+        res = ft_strjoin(" ", str);
         free(str);
     }
     else
