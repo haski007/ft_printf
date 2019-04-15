@@ -20,15 +20,17 @@ char                *implement_plus(long long int nb, t_orgi *params)
     res = NULL;
     str = ft_itoa(nb);
     str = implement_precision(str, params);
+    str = implement_width(str, params->width, params);
     if (params->plus && nb > -1)
     {
-        res = (params->precision > ft_numlen(nb)) ? ft_strjoin("+", str + 1)
+        res = (params->width > ft_numlen(nb) && params->zero) ? ft_strjoin("+", str + 1)
         : ft_strjoin("+", str);
         free(str);
     }
     else if (params->space && nb > -1)
     {
-        res = ft_strjoin(" ", str);
+        res = (params->width > ft_numlen(nb) && params->zero) ? ft_strjoin(" ", str + 1)
+        : ft_strjoin(" ", str);
         free(str);
     }
     else

@@ -71,7 +71,6 @@ char             *d_type(va_list var, t_orgi *params)
         str = "+0";
     str = implement_plus(nb, params);
     str = implement_precision(str, params);
-    str = implement_width(str, params->width, params);
     return (str);
 }
 
