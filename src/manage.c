@@ -18,10 +18,10 @@ char                *implement_plus(long long int nb, t_orgi *params)
     char *res;
 
     res = NULL;
-    str = (nb < 0) ? ft_itoa(-nb) : ft_itoa(nb);
+    str = ft_itoa(nb);
+    str = implement_precision(str, params);
     if (params->plus && nb > -1)
     {
-        str = implement_precision(str, params);
         res = ft_strjoin("+", str);
         free(str);
     }

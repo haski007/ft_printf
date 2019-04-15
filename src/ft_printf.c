@@ -40,8 +40,6 @@ static void         check_precision(const char *format, int nargs, t_orgi *param
         {
             params->dot = 1;
             params->precision = ft_atoi(format + 1 + nargs);
-            if (params->plus)
-                params->precision--;
             return ;
         }
     }
