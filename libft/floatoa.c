@@ -12,52 +12,45 @@
 
 #include "libft.h"
 
-static long double	fabs(long double num)
+static void			cat(char *str, char *itoa_b)
 {
-	if (num < 0)
-		num *= -1;
-	return (num);
+	ft_strcat(str, itoa_b);
+	free(itoa_b);
 }
 
-static void			cat_free(char *str, char *itoa_ret)
+static void			make_the_end(char *str, char *itoa_b, int precision)
 {
-	ft_strcat(str, itoa_ret);
-	free(itoa_ret);
-}
+	int len;
 
-static void			fill_zeros(char *str, char *itoa_ret, int precision)
-{
-	int itoa_len;
-
-	itoa_len = ft_strlen(itoa_ret);
-	while (itoa_len++ < precision)
+	len = ft_strlen(itoa_b);
+	while (len++ < precision)
 		ft_strcat(str, "0");
 }
 
-char				*floatoa(long double num, unsigned int precision)
+char				*floatoa(long double nb, unsigned int precision)
 {
-	long long int	ip;
-	long double		fp;
+	long long int	base;
+	long double		prec;
 	char			*str;
-	char			*itoa_ret;
+	char			*itoa_b;
 
 	str = ft_strnew(30);
-	if (num < 0 || num == -0.0)
+	if ((nb < 0 || nb == -0.0) && nb != 0.0)
 	{
 		ft_strcat(str, "-");
-		num = fabs(num);
+		nb = -nb;
 	}
-	ip = (long long int)num;
-	fp = num - ip;
-	itoa_ret = ft_itoa(ip);
-	cat_free(str, itoa_ret);
-	if (precision != 0)
+	base = (long long int)nb;
+	prec = nb - base;
+	itoa_b = ft_itoa(base);
+	cat(str, itoa_b);
+	if (precision)
 	{
 		ft_strcat(str, ".");
-		fp = fp * ft_power(10, precision);
-		itoa_ret = fp - (int)fp >= 0.5 ? ft_itoa(fp + 1) : ft_itoa(fp);
-		fill_zeros(str, itoa_ret, precision);
-		cat_free(str, itoa_ret);
+		prec = prec * ft_power(10, precision);
+		itoa_b = prec - (int)prec >= 0.5 ? ft_itoa(prec + 1) : ft_itoa(prec);
+		make_the_end(str, itoa_b, precision);
+		cat(str, itoa_b);
 	}
 	return (str);
 }

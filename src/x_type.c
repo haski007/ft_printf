@@ -48,8 +48,7 @@ char					*x_type(va_list var, t_orgi *params)
 	str = implement_precision(str, params);
 	str = (params->sharp && params->zero) ?
 		implement_width(str, params->width - 2, params) : str;
-	if (params->sharp && str[ft_strlen(str) - 1] != '0'
-			&& ft_strlen(str) > 0)
+	if (params->sharp && ft_strlen(str) > 0)
 		str = add_0x(str);
 	str = (!params->zero || !params->sharp) ?
 		implement_width(str, params->width, params) : str;

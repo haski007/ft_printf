@@ -12,6 +12,29 @@
 
 #include "../includes/ft_printf.h"
 
+static void			color_this(va_list var)
+{
+	char	*color_code;
+
+	color_code = va_arg(var, char*);
+	if (ft_strequ(color_code, RED) ||
+		ft_strequ(color_code, GREEN) ||
+		ft_strequ(color_code, YELLOW) ||
+		ft_strequ(color_code, BLUE) ||
+		ft_strequ(color_code, MAGENTA) ||
+		ft_strequ(color_code, CYAN) ||
+		ft_strequ(color_code, WHITE) ||
+		ft_strequ(color_code, B_RED) ||
+		ft_strequ(color_code, B_GREEN) ||
+		ft_strequ(color_code, B_YELLOW) ||
+		ft_strequ(color_code, B_BLUE) ||
+		ft_strequ(color_code, B_MAGENTA) ||
+		ft_strequ(color_code, B_CYAN) ||
+		ft_strequ(color_code, B_WHITE) ||
+		ft_strequ(color_code, EOC))
+		ft_putstr(color_code);
+}
+
 static char			*get_str(va_list var, t_orgi *params)
 {
 	char	*res;
@@ -85,6 +108,11 @@ int					parse_this(va_list var, t_orgi *params)
 	char	*res;
 	int		len;
 
+	if (params->type == 't')
+	{
+		color_this(var);
+		return (0);
+	}
 	res = get_str(var, params);
 	ft_putstr(res);
 	len = ft_strlen(res);

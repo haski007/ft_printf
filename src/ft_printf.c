@@ -66,7 +66,7 @@ static int				count_args(const char *format)
 	if (*format == '%')
 		return (0);
 	i = 0;
-	all_possible = "cspdio%ufxX";
+	all_possible = "cspdio%ufxXt";
 	while (format[i])
 	{
 		if ((ft_strchr(all_possible, format[i])))
@@ -98,7 +98,7 @@ int						ft_printf(const char *format, ...)
 			nargs = count_args(format);
 			save_this(format, nargs, &params);
 			done += parse_this(args, &params);
-			format += nargs - 1;
+			format += (params.type == 't') ? 0 : nargs - 1;
 		}
 		format++;
 	}

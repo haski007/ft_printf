@@ -19,6 +19,22 @@
 # include <stdio.h>
 # include <stdarg.h>
 
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define WHITE "\x1b[37m"
+# define B_RED "\x1b[31;1m"
+# define B_GREEN "\x1b[32;1m"
+# define B_YELLOW "\x1b[33;1m"
+# define B_BLUE "\x1b[34;1m"
+# define B_MAGENTA "\x1b[35;1m"
+# define B_CYAN "\x1b[36;1m"
+# define B_WHITE "\x1b[37;1m"
+# define EOC "\x1b[0m"
+
 typedef struct		s_orgi
 {
 	int				len;
