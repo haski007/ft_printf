@@ -21,9 +21,9 @@ char				*u_type(t_orgi *params, va_list var)
 	else if (params->ll)
 		str = ft_itoa(va_arg(var, unsigned long long));
 	else if (params->h)
-		str = ft_u_itoa(va_arg(var, unsigned short int));
+		str = ft_u_itoa((unsigned short int)va_arg(var, int));
 	else if (params->hh)
-		str = ft_u_itoa(va_arg(var, unsigned char));
+		str = ft_u_itoa((unsigned char)va_arg(var, int));
 	else
 		str = ft_itoa(va_arg(var, unsigned int));
 	str = implement_width(str, params->width, params);
@@ -40,9 +40,9 @@ char				*o_type(va_list var, t_orgi *params)
 	else if (params->ll)
 		str = itoa_base(va_arg(var, unsigned long long), 8);
 	else if (params->h)
-		str = itoa_base(va_arg(var, unsigned short int), 8);
+		str = itoa_base((unsigned short int)va_arg(var, int), 8);
 	else if (params->hh)
-		str = itoa_base(va_arg(var, unsigned char), 8);
+		str = itoa_base((unsigned char)va_arg(var, int), 8);
 	else
 		str = itoa_base(va_arg(var, int), 8);
 	if (params->sharp && str[ft_strlen(str) - 1] != '0')
@@ -62,9 +62,9 @@ char				*d_type(va_list var, t_orgi *params)
 	else if (params->ll)
 		nb = va_arg(var, long long int);
 	else if (params->h)
-		nb = va_arg(var, short int);
+		nb = (short int)va_arg(var, int);
 	else if (params->hh)
-		nb = va_arg(var, signed char);
+		nb = (signed char)va_arg(var, int);
 	else
 		nb = va_arg(var, int);
 	if (nb == 0 && params->plus == '+')

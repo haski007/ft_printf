@@ -53,7 +53,7 @@ char				*implement_width(char *str, int width, t_orgi *params)
 }
 
 static char			*implement_minus(char *str,
-		long long int nb, t_orgi *params)
+		long long int nb)
 {
 	char *res;
 
@@ -87,7 +87,7 @@ char				*implement_sign(char *str, long long int nb, t_orgi *params)
 	}
 	else
 		res = str;
-	res = implement_minus(res, nb, params);
+	res = implement_minus(res, nb);
 	return (res);
 }
 
