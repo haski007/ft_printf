@@ -35,11 +35,11 @@ static void				get_flags(const char *format, int nargs, t_orgi *params)
 static void				check_precision(const char *format,
 		int nargs, t_orgi *params)
 {
-	while (format[--nargs])
+	while (--nargs > -1)
 	{
 		if (format[nargs] == '.')
 		{
-			params->dot = 1;
+			params->dot = 'H';
 			params->precision = ft_atoi(format + 1 + nargs);
 			return ;
 		}

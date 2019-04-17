@@ -17,8 +17,8 @@ char				*implement_precision(char *str, t_orgi *params)
 	char	*tmp;
 	char	*res;
 	int		len;
-
-	if (str[0] == '0' && params->dot && !str[1] && params->type != 'x')
+	
+	if (str[0] == '0' && params->dot && !str[1])
 		return (ft_strdup(""));
 	if (params->precision && (len = params->precision - ft_strlen(str)) > 0)
 	{

@@ -16,8 +16,8 @@ int         main(void)
     // int     *b = &a;
     // long long double  chlen = -0;
     
-    my_result = ft_printf("%.f---------%t%#x%t------%-5d*\n", 5.5193123, RED, 32, WHITE, 2);
-    org_result = printf("%.f---------%#x------%-5d*\n", 5.5193123, 32, 2);
+    my_result = ft_printf("%.f---------%t%#x%t------%-.5d*\n", 5.5193123, RED, 0, WHITE, 2);
+    org_result = printf("%.f---------%#x------%-.5d*\n", 5.5193123, 0, 2);
     printf("\n\nMy result - %d\n", my_result);
     printf("Original result - %d\n", org_result);
     //   system("leaks ft_printf"); 
