@@ -25,7 +25,7 @@ static char				*types_manager(va_list var, t_orgi *params)
 	else if (params->hh)
 		str = u_itoa_base((unsigned char)va_arg(var, int), 16);
 	else
-		str = itoa_base(va_arg(var, unsigned int), 16);
+		str = itoa_base(va_arg(var, unsigned int), 16);	
 	return (str);
 }
 
@@ -42,13 +42,15 @@ char					*x_type(va_list var, t_orgi *params)
 {
 	char	*str;
 	int		i;
+	char	fuck;
 
 	i = -1;
 	str = types_manager(var, params);
+	fuck = (str[0] == '0') ? 1 : 0;
 	str = implement_precision(str, params);
 	str = (params->sharp && params->zero) ?
 		implement_width(str, params->width - 2, params) : str;
-	if (params->sharp && ft_strlen(str) > 0)
+	if (params->sharp && ft_strlen(str) > 0 && !fuck)
 		str = add_0x(str);
 	str = (!params->zero || !params->sharp) ?
 		implement_width(str, params->width, params) : str;

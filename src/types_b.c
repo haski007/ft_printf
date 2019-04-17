@@ -51,14 +51,14 @@ char				*f_type(va_list var, t_orgi *params)
 
 	if (params->bigl == 1)
 	{
-		if (params->precision)
+		if (params->dot)
 			str = floatoa(va_arg(var, long double), params->precision);
 		else
 			str = floatoa(va_arg(var, long double), 6);
 	}
 	else
 	{
-		if (params->precision)
+		if (params->dot)
 			str = floatoa(va_arg(var, double), params->precision);
 		else
 			str = floatoa(va_arg(var, double), 6);
@@ -68,4 +68,14 @@ char				*f_type(va_list var, t_orgi *params)
 			paste_start(str, '+') : paste_start(str, ' ');
 	tmp = implement_width(str, params->width, params);
 	return (tmp);
+}
+
+char				*percent_manages(t_orgi *params)
+{
+	char	*str;
+
+	str = ft_strdup("%");
+	str = implement_precision(str, params);
+	str = implement_width(str, params->width, params);
+	return (str);
 }

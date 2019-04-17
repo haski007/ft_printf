@@ -12,6 +12,19 @@
 
 #include "libft.h"
 
+static int			round_int(long double base, long double prec)
+{
+	if (base > 0 && prec >= 0.5)
+		return (base + 1);
+	else if (base < 0 && prec <= -0.5)
+		return (base + 1);
+	else if (base > 0 && prec < 0.5)
+		return (base);
+	else if (base < 0 && prec > -0.5)
+		return (base);
+	return (base);
+}
+
 static void			cat(char *str, char *itoa_b)
 {
 	ft_strcat(str, itoa_b);
@@ -42,6 +55,7 @@ char				*floatoa(long double nb, unsigned int precision)
 	}
 	base = (long long int)nb;
 	prec = nb - base;
+	base = (!precision) ? round_int(base, prec) : base;
 	itoa_b = ft_itoa(base);
 	cat(str, itoa_b);
 	if (precision)
