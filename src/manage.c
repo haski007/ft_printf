@@ -19,11 +19,16 @@ char				*implement_precision(char *str, t_orgi *params)
 	int		len;
 
 	if (str[0] == '0' && params->dot && !str[1] && (!params->sharp
-	|| params->type == 'x') && params->type != 'd'
-	&& params->type != '0' && params->type != 'u')
+	|| params->type == 'x') && params->type != 'd')
+	{
+		free(str);
 		return (ft_strdup(""));
-	else if (params->type == 'o' && params->sharp && str[0] == '0')
+	}
+	else if (params->type == 'o' && params->sharp && str[1] == '0')
+	{
+		free(str);
 		return (ft_strdup("0"));
+	}
 	if (params->precision && (len = params->precision - ft_strlen(str)) > 0)
 	{
 		tmp = ft_strnew(len);
