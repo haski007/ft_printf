@@ -25,7 +25,7 @@ static char				*types_manager(va_list var, t_orgi *params)
 	else if (params->hh)
 		str = u_itoa_base((unsigned char)va_arg(var, int), 16);
 	else
-		str = itoa_base(va_arg(var, unsigned int), 16);	
+		str = itoa_base(va_arg(var, unsigned int), 16);
 	return (str);
 }
 

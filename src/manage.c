@@ -17,9 +17,13 @@ char				*implement_precision(char *str, t_orgi *params)
 	char	*tmp;
 	char	*res;
 	int		len;
-	
-	if (str[0] == '0' && params->dot && !str[1])
+
+	if (str[0] == '0' && params->dot && !str[1] && (!params->sharp
+	|| params->type == 'x') && params->type != 'd'
+	&& params->type != '0' && params->type != 'u')
 		return (ft_strdup(""));
+	else if (params->type == 'o' && params->sharp && str[0] == '0')
+		return (ft_strdup("0"));
 	if (params->precision && (len = params->precision - ft_strlen(str)) > 0)
 	{
 		tmp = ft_strnew(len);
@@ -45,7 +49,9 @@ char				*implement_width(char *str, int width, t_orgi *params)
 		else
 			res = ft_strjoin(ft_memset(tmp, ((params->zero &&
 							!params->dot) || (params->type == '%'
-							&& !params->precision)) ? '0' : ' ', len), str);
+							&& !params->precision
+							&& params->zero)
+							|| params->type == 'f') ? '0' : ' ', len), str);
 		free(tmp);
 		free(str);
 		return (res);
