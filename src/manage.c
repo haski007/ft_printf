@@ -85,7 +85,7 @@ char				*implement_sign(char *str, long long int nb, t_orgi *params)
 	char *res;
 
 	res = NULL;
-	str = (params->zero) ?
+	str = (params->zero && !params->precision) ?
 		implement_width(str, params->width - 1, params) : str;
 	if (params->plus && nb > -1)
 	{
